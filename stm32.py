@@ -54,7 +54,7 @@ def readonly_handler(func, path):
 class Plugin(object):
     def __init__(self, opt):
         self.project = opt.project  # project path
-        self.model_path = opt.model_path  # model path
+        self.model_path = opt.model  # model path
         self.rt_ai_example = opt.rt_ai_example  # Documents
         self.platform = opt.platform
         self.c_model_name = opt.model_name  # c model name

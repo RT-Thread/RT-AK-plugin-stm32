@@ -1,7 +1,19 @@
-## 1. 硬件平台1 - stm32
+<center><h1>RT-AK 之 STM32</h1></center>
+
+[TOC]
+
+本项目归属于 `RT-AK` 主项目中的一个子模块。
+
+使用 `STM32` 原厂插件进行开发。
+
+- 原厂插件：`X-CUBE-AI`
+
+# 前期工作
 
 - 下载并解压 `X-CUBE-AI`，下载地址：[X-CUBE-AI](https://www.st.com/zh/embedded-software/x-cube-ai.html) | Version: v5.2.0
 - 模型支持：Keras、TFLite、Caffe、ONNX
+
+#  - stm32
 
 ### Part2：stm32 参数
 
