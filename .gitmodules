@@ -1,3 +1,0 @@
-[submodule "backend_stm32"]
-	path = backend_stm32
-	url = https://git.rt-thread.com/liqiwen/backend_cubeai.git
