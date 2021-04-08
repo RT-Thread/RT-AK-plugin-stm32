@@ -28,7 +28,7 @@ sup_cpus = ["H7", "MP1", "WL", "M4", "M7", "M33"]
 stm32_dirs = ["Middlewares", "X-CUBE-AI"]
 
 # sconscripts path
-sconscript_path = "platforms/stm32/Sconscripts"
+sconscript_path = "platforms/plugin_stm32/Sconscripts"
 
 # support modes:{analyze, validate, generate}
 sup_modes = {"001", "011", "101", "111"}

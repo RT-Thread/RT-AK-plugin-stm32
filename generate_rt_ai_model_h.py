@@ -19,7 +19,7 @@ from pathlib import Path
 path = os.path.dirname(__file__)
 sys.path.append(os.path.join(path, '../../'))
 
-from platforms.stm32.config import input_and_output_info
+from platforms.plugin_stm32.config import input_and_output_info
 
 
 def config_activates_weights_info(model_name_upper, model_data_h, cube_ai_info, rt_ai_info):
