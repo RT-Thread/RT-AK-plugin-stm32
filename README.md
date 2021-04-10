@@ -20,35 +20,42 @@
 ## 目录结构
 
 ```shell
-D:\Project\edge-ai\RTAK\rt_ai_tools\platforms\stm32>tree /a
-卷 软件 的文件夹 PATH 列表
-卷序列号为 E67E-D1CA
-D:.
-+---docs
-+---Sconscripts
-+---stm32programmer_cli
-+---X-CUBE-AI.5.2.0
-|   \---Middlewares
-\---__pycache__
+% tree -L 2 stm32 
+stm32
+├── backend_plugin_stm32
+│   ├── backend_cubeai.c
+│   ├── backend_cubeai.h
+│   └── readme.md
+├── config.py  # 生成 `rt_ai_<model_name>_model.h` 的一些配置信息，保存在 <BSP>/applications
+├── docs  # `X-CUBE-AI` 相关文档说明； 
+│   ├── command_line_interface.html
+│   ├── embedded_client_api.html
+│   ├── en.stsw-link009.zip  # `STLink` 驱动
+│   ├── ...
+│   ├── relocatable.html
+│   ├── RT-AK之STM32快速上手.md
+│   ├── stm32.c
+│   ├── stm32programmer-cli.pdf
+│   └── 量化(未完成).md
+├── generate_rt_ai_model_h.py  # 生成 `rt_ai_<model_name>_model.h` ，保存在 <BSP>/applications
+├── gen_rt_ai_model_c.py  # 生成 `rt_ai_<model_name>_model.c` ，保存在 <BSP>/applications
+├── __init__.py
+├── plugin_init.py  # 将 `stm32ai` （`X-CUBE-AI` 的模型转换工具）添加到系统变量
+├── plugin_stm32_parser.py  # `STM32` 平台插件运行所需的参数
+├── plugin_stm32.py  # `STM32` 平台插件运行主函数
+├── prepare_work.py  # 生成两个文件夹，存放 x-cube-ai 静态库和 c-model 文件; 加载对应的 Sconscript
+├── README.md
+├── run_x_cube_ai.py  # 运行 `stm32ai` 工具，进行模型转换工作
+├── Sconscripts  # 模型转换之后，参与到项目 `scons` 编译的脚本文件
+│   ├── Middlewares
+│   └── X-CUBE-AI
+├── stm32programmer_cli  # STM32` 命令行下载(烧录)固件工具
+│   ├── bin
+│   └── Data_Base
+└── X-CUBE-AI.5.2.0  # `STM32Cube.AI` 所提供的静态库
+    ├── Copyrights.txt
+    └── Middlewares
 ```
-
-| Dir                   | Description                                     |
-| --------------------- | ----------------------------------------------- |
-| `docs`                | `X-CUBE-AI` 相关文档说明； `STLink` 驱动        |
-| `Sconscripts`         | 模型转换之后，参与到项目 `scons` 编译的脚本文件 |
-| `stm32programmer_cli` | `STM32` 命令行下载(烧录)固件工具                |
-| `X-CUBE-AI.5.2.0`     | `STM32Cube.AI` 所提供的静态库                   |
-
-| File                        | Description                                                  |
-| --------------------------- | ------------------------------------------------------------ |
-| `config.py`                 | 生成 `rt_ai_<model_name>_model.h` 的一些配置信息，保存在 `project/applications` |
-| `gen_rt_ai_model_c.py`      | 生成 `rt_ai_<model_name>_model.c` 文件，保存在 `project/applications` |
-| `generate_rt_ai_model_h.py` | 生成 `rt_ai_<model_name>_model.h` 文件，保存在 `project/applications` |
-| `plugin_init.py`            | 将 `stm32ai` （`X-CUBE-AI` 的模型转换工具）添加到系统变量    |
-| `prepare_work.py`           | 1. 生成两个文件夹，分别存放 `x-cube-ai` 静态库和 `c-model` 文件，如果之前存在，先删除原本的文件夹 加载对应的 `Sconscript`<br>2. 加载对应的 `Sconscript` |
-| `run_x_cube_ai.py`          | 运行 `stm32ai` 工具，进行模型转换工作，有三种工作模式：`analyze | validate | generate` |
-| `stm32.py`                  | `STM32` 平台插件运行主函数                                   |
-| `stm32_parser.py`           | `STM32` 平台插件运行所需的参数                               |
 
 ## 参数说明
 
