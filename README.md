@@ -1,6 +1,14 @@
 <center><h1>RT-AK 之 STM32</h1></center>
 
-[TOC]
+- [简介](# 简介)
+- [目录结构](# 目录结构)
+- [参数说明](# 参数说明)
+- [运行](# 运行)
+  - [1 基础运行命令](# 1 基础运行命令)
+  - [2 指定参数运行](# 2 指定参数运行)
+- [功能列表](# 功能列表)
+
+## 简介
 
 *本项目归属于 `RT-AK` 主项目中的一个子模块。*
 
@@ -9,7 +17,7 @@
 - 原厂插件：`X-CUBE-AI`
 - 模型支持：`Keras | TFLite | Caffe | ONNX`
 
-# 目录结构
+## 目录结构
 
 ```shell
 D:\Project\edge-ai\RTAK\rt_ai_tools\platforms\stm32>tree /a
@@ -42,9 +50,9 @@ D:.
 | `stm32.py`                  | `STM32` 平台插件运行主函数                                   |
 | `stm32_parser.py`           | `STM32` 平台插件运行所需的参数                               |
 
-# 参数说明
+## 参数说明
 
-> 详见 `stm32_parser.py` 
+> 详见 `plugin_stm32_parser.py` 
 
 | Parameter           | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
@@ -65,7 +73,47 @@ D:.
 
   `--ext_tools="D:/Program Files (x86)/stm32ai-windows-5.2.0/windows"`
 
-# 功能
+## 运行
+
+### 1 基础运行命令
+
+请在 `edge-ai/RTAK/tools` 路径下运行该程序。
+
+![](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210223145923.png)
+
+```shell
+# 基础运行命令
+python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --flag
+
+# 示例
+python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Models/keras_mnist.h5" --platform=stm32 --ext_tools="D:\Program Files (x86)\stm32ai-windows-5.2.0\windows" --flag
+```
+
+![image-20210401181247394](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210401181248.png)
+
+### 2 指定参数运行
+
+```shell
+# 指定转换模型的名称，--model_name 默认为 network
+python aitools.py --project=<your_project_path> --model=<your_model_path>  --model_name=<model_name>  --platform=stm32 --ext_tools=<your_x-cube-ai_path>
+
+# 保存运行 stm32ai 线程过程中产生的文件，--flag 默认为空
+# 如果存在，则将会删除`stm32ai` 运行时产生的工作文件夹，即`--stm_out`
+python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path>
+
+# 指定保存运行日志, --log 默认为空
+python aitools.py --project=<your_project_path> --model=<your_model_path> --log=./log.log --platform=stm32 --ext_tools=<your_x-cube-ai_path>
+
+# 指定保存的文件夹名称，--stm_out 默认是当天时间，比如 './20210223'
+python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --stm_out <new_dir>
+
+# 指定生成的 c-model 名，--c_model_name 默认是network
+python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --c_model_name=<new_model_name>
+```
+
+完整的项目实战例程，请阅读：[RT-AK之STM32快速上手.md](./docs/RT-AK之STM32快速上手.md)
+
+## 功能列表
 
 - [x] 判断模型是否支持
 - [x] 判断 `CPU` 是否支持
