@@ -74,7 +74,7 @@ stm32
 | `--mode`            | "analyze\|validate" 模式（可选）+”generate“模式（必须有），`1`表示选中，在`{'001', '011', '101', '111'}`中选一个，默认是 `001` |
 | **--network**       | **在 `Documents` 中的模板文件的模型名，默认是 `mnist`**      |
 | **--enable_rt_lib** | **在 `project/rtconfgi.h` 中打开宏定义，默认是 `RT_AI_USE_CUBE`** |
-| --flag              | 是否需要删除 `stm32ai` 生成的中间文件夹 `stm_out` ，默认为`False` |
+| --clear              | 是否需要删除 `stm32ai` 生成的中间文件夹 `stm_out` ，默认为`False` |
 
 - 示例：
 
@@ -90,10 +90,10 @@ stm32
 
 ```shell
 # 基础运行命令
-python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --flag
+python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --clear
 
 # 示例
-python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Models/keras_mnist.h5" --platform=stm32 --ext_tools="D:\Program Files (x86)\stm32ai-windows-5.2.0\windows" --flag
+python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Models/keras_mnist.h5" --platform=stm32 --ext_tools="D:\Program Files (x86)\stm32ai-windows-5.2.0\windows" --clear
 ```
 
 ![image-20210401181247394](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210401181248.png)
@@ -104,7 +104,7 @@ python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Model
 # 指定转换模型的名称，--model_name 默认为 network
 python aitools.py --project=<your_project_path> --model=<your_model_path>  --model_name=<model_name>  --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# 保存运行 stm32ai 线程过程中产生的文件，--flag 默认为空
+# 保存运行 stm32ai 线程过程中产生的文件，--clear 默认为空
 # 如果存在，则将会删除`stm32ai` 运行时产生的工作文件夹，即`--stm_out`
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 

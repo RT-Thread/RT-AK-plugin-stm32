@@ -73,7 +73,7 @@ class Plugin(object):
         # self.stm32_dirs = opt.stm32_dirs  # Middlewares X-CUBE-AI
         self.network = opt.network  # default network name in sample files
         self.enable_rt_lib = opt.enable_rt_lib  # enable stm32 in <pro>/rtconfig.h
-        self.flag = opt.flag
+        self.clear = opt.clear
 
         # x-cube-ai:stm32ai fixed parameters
         self.stm32_ai_fixed_params = [opt.workspace, opt.compress, opt.batches, opt.mode, opt.val_data]
@@ -279,7 +279,7 @@ class Plugin(object):
 
 
         # 7. remove x-cube-ai output dirs or not
-        if os.path.exists(self.stm_out) and self.flag:
+        if os.path.exists(self.stm_out) and self.clear:
             shutil.rmtree(self.stm_out, onerror=readonly_handler)
 
 
@@ -298,8 +298,8 @@ if __name__ == "__main__":
             self.platform = "stm32"
 
             # stm32
-            self.model_path = "./Model/keras_mnist.h5"
-            self.flag = False
+            self.model = "./Model/keras_mnist.h5"
+            self.clear = False
             self.cpu = "M7"
             self.enable_rt_lib = "RT_AI_USE_CUBE"
             self.workspace = "./tmp_cwd/stm32ai_ws"
