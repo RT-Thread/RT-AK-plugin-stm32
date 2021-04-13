@@ -49,9 +49,6 @@ stm32
 ├── Sconscripts  # 模型转换之后，参与到项目 `scons` 编译的脚本文件
 │   ├── Middlewares
 │   └── X-CUBE-AI
-├── stm32programmer_cli  # STM32` 命令行下载(烧录)固件工具
-│   ├── bin
-│   └── Data_Base
 └── X-CUBE-AI.5.2.0  # `STM32Cube.AI` 所提供的静态库
     ├── Copyrights.txt
     └── Middlewares

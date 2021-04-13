@@ -1,2 +1,0 @@
-cd /dD:\RT-ThreadStudio\repo\Extract\Debugger_Support_Packages\STMicroelectronics\ST-LINK_Debugger\1.4.0\tools\bin
-D:\RT-ThreadStudio\repo\Extract\Debugger_Support_Packages\STMicroelectronics\ST-LINK_Debugger\1.4.0\tools\bin\STM32_Programmer_CLI.exe -c port=SWD --extload D:\RT-ThreadStudio\workspace\qwe\board\stldr\ART-Pi_W25Q64.stldr mode=NORMAL -d "D:\RT-ThreadStudio\workspace\qwe\Debug\rtthread.elf" -hardRst -s
