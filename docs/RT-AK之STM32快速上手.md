@@ -15,12 +15,12 @@
 
 准备以下四份**重要重要重要**的材料：
 
-| Index |     Prepare     | Example                              |
-| :---: | :-------------: | ------------------------------------ |
-|   1   | 硬件以及 `BSP`  | `ART-PI BSP`                         |
-|   2   |  神经网络模型   | `./rt_ai_tools/Model/keras_mnist.h5` |
-|   3   | `STM32 AI` 插件 | `X-CUBE-AI` 下载解压，下文有介绍     |
-|   4   |     `RT-AK`     | `RT-AK` 代码克隆到本地               |
+| Index |     Prepare     | Example                                                      |
+| :---: | :-------------: | ------------------------------------------------------------ |
+|   1   | 硬件以及 `BSP`  | `ART-PI BSP`                                                 |
+|   2   |  神经网络模型   | `./rt_ai_tools/Model/keras_mnist.h5`                         |
+|   3   | `STM32 AI` 插件 | `X-CUBE-AI` 下载解压，下文有介绍                             |
+|   4   |     `RT-AK`     | [RT-AK](https://github.com/RT-Thread/RT-AK.git) 代码克隆到本地 |
 
 - 下载 `ART-PI BSP` 地址： [ART-PI](http://117.143.63.254:9012/www/RT-AK/sdk-bsp-artpi.zip)
 
