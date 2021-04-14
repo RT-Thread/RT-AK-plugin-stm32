@@ -6,8 +6,8 @@
 - [目录结构](#目录结构)
 - [参数说明](#参数说明)
 - [运行](#运行)
-  - [1 基础运行命令](#1基础运行命令)
-  - [2 指定参数运行](#2指定参数运行)
+  - [1 基础运行命令](#1 基础运行命令)
+  - [2 指定参数运行](#2 指定参数运行)
 - [功能列表](#功能列表)
 
 ## 简介
@@ -17,7 +17,7 @@
 使用 `STM32` 原厂插件进行开发。
 
 - 原厂插件：`X-CUBE-AI`
-- 模型支持：`Keras | TFLite | Caffe | ONNX`
+- 模型支持：`Keras | TFLite | ONNX`
 
 ## 目录结构
 
@@ -25,20 +25,20 @@
 % tree -L 2 stm32 
 stm32
 ├── backend_plugin_stm32
-│?? ├── backend_cubeai.c
-│?? ├── backend_cubeai.h
-│?? └── readme.md
+│   ├── backend_cubeai.c
+│   ├── backend_cubeai.h
+│   └── readme.md
 ├── config.py  # 生成 `rt_ai_<model_name>_model.h` 的一些配置信息，保存在 <BSP>/applications
 ├── docs  # `X-CUBE-AI` 相关文档说明； 
-│?? ├── command_line_interface.html
-│?? ├── embedded_client_api.html
-│?? ├── en.stsw-link009.zip  # `STLink` 驱动
-│?? ├── ...
-│?? ├── relocatable.html
-│?? ├── RT-AK之STM32快速上手.md
-│?? ├── stm32.c
-│?? ├── stm32programmer-cli.pdf
-│?? └── 量化(未完成).md
+│   ├── command_line_interface.html
+│   ├── embedded_client_api.html
+│   ├── en.stsw-link009.zip  # `STLink` 驱动
+│   ├── ...
+│   ├── relocatable.html
+│   ├── RT-AK之STM32快速上手.md
+│   ├── stm32.c
+│   ├── stm32programmer-cli.pdf
+│   └── 量化(未完成).md
 ├── generate_rt_ai_model_h.py  # 生成 `rt_ai_<model_name>_model.h` ，保存在 <BSP>/applications
 ├── gen_rt_ai_model_c.py  # 生成 `rt_ai_<model_name>_model.c` ，保存在 <BSP>/applications
 ├── __init__.py
@@ -49,8 +49,8 @@ stm32
 ├── README.md
 ├── run_x_cube_ai.py  # 运行 `stm32ai` 工具，进行模型转换工作
 ├── Sconscripts  # 模型转换之后，参与到项目 `scons` 编译的脚本文件
-│?? ├── Middlewares
-│?? └── X-CUBE-AI
+│   ├── Middlewares
+│   └── X-CUBE-AI
 └── X-CUBE-AI.5.2.0  # `STM32Cube.AI` 所提供的静态库
     ├── Copyrights.txt
     └── Middlewares

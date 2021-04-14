@@ -1,4 +1,4 @@
-f<center><h1>RT-AK 快速上手</h1></center>
+<center><h1>RT-AK 快速上手</h1></center>
 
 [TOC]
 
@@ -6,24 +6,31 @@ f<center><h1>RT-AK 快速上手</h1></center>
 
 *致力于做一个保姆级教程*
 
+*本教程 RT-AK 搭配平台插件：STM32*
+
 - Windows 10
 - Python >= 3.7
 
 # 1. 准备工作
 
-```bash
-# 克隆主项目
-$ git clone xxx/edge-ai
-```
+准备以下四份**重要重要重要**的材料：
 
 | Index |     Prepare     | Example                              |
 | :---: | :-------------: | ------------------------------------ |
-|   1   | 硬件以及 `BSP`  | `ART-PI`                             |
+|   1   | 硬件以及 `BSP`  | `ART-PI BSP`                         |
 |   2   |  神经网络模型   | `./rt_ai_tools/Model/keras_mnist.h5` |
-|   3   | `STM32 AI` 插件 | `X-CUBE-AI`                          |
+|   3   | `STM32 AI` 插件 | `X-CUBE-AI` 下载解压，下文有介绍     |
+|   4   |     `RT-AK`     | `RT-AK` 代码克隆到本地               |
 
 - 下载 `ART-PI BSP` 地址： [ART-PI](http://117.143.63.254:9012/www/RT-AK/sdk-bsp-artpi.zip)
-- 下载 `X-CUBE-AI` 地址：[X-CUBE-AI](https://www.st.com/zh/embedded-software/x-cube-ai.html) | Version: v5.2.0
+
+- 下载 `X-CUBE-AI` 
+
+  - 地址，以下二选一：
+
+    [官网](https://www.st.com/zh/embedded-software/x-cube-ai.html)  | [其他](http://117.143.63.254:9012/www/RT-AK/stm32ai-windows-5.2.0.zip)
+
+  - 版本: v5.2.0
 
 ## 1.1 X-CUBE-AI 介绍
 
@@ -58,17 +65,15 @@ $ git clone xxx/edge-ai
 
 ![](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210401162400.png)
 
-# 2. 工作流程
+<center><font size=2 color="gray">STM32: X-CUBE-AI 解压路径</font></center>
 
-1. 运行 `rt_ai_tools/aitools.py`
+# 2. 执行步骤
 
-   > 代码将会自动使用 `STM32Cube.AI` 的模型转换工具
+> 代码将会自动使用 `STM32Cube.AI` 的模型转换工具，获得一个集成了 AI 的 BSP
+>
+> 对，就是这么硬核，一步肝到位！
 
-2. BSP 工程项目进行编译
-
-3. 将编译好的固件烧录到 `ART-PI`
-
-# 3. 运行 aitools.py
+内部的流程请看源码或者 `plugin_stm32` 仓库下的 `readme` 文档
 
 ## 3.1 基础运行命令
 
@@ -78,21 +83,21 @@ $ git clone xxx/edge-ai
 
 ```shell
 # 基础运行命令
-python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --flag
+python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --clear
 
 # 示例
-python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Models/keras_mnist.h5" --platform=stm32 --ext_tools="D:\Program Files (x86)\stm32ai-windows-5.2.0\windows" --flag
+python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Models/keras_mnist.h5" --platform=stm32 --ext_tools="D:\Program Files (x86)\stm32ai-windows-5.2.0\windows" --clear
 ```
 
 ![image-20210401181247394](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210401181248.png)
 
-## 3.2 指定参数运行
+## 3.2 其他运行参数补充说明
 
 ```shell
 # 指定转换模型的名称，--model_name 默认为 network
 python aitools.py --project=<your_project_path> --model=<your_model_path>  --model_name=<model_name>  --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# 保存运行 stm32ai 线程过程中产生的文件，--flag 默认为空
+# 保存运行 stm32ai 线程过程中产生的文件，--clear 默认为空
 # 如果存在，则将会删除`stm32ai` 运行时产生的工作文件夹，即`--stm_out`
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
@@ -106,7 +111,7 @@ python aitools.py --project=<your_project_path> --model=<your_model_path> --plat
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --c_model_name=<new_model_name>
 ```
 
-## 3.3 参数说明
+## 3.3 运行参数详细说明
 
 - 主函数参数部分
 
@@ -135,7 +140,7 @@ python aitools.py --project=<your_project_path> --model=<your_model_path> --plat
 | `--mode`            | "analyze\|validate" 模式（可选）+”generate“模式（必须有），`1`表示选中，在`{'001', '011', '101', '111'}`中选一个，默认是 `001` |
 | **--network**       | **在 `Documents` 中的模板文件的模型名，默认是 `mnist`**      |
 | **--enable_rt_lib** | **在 `project/rtconfgi.h` 中打开宏定义，默认是 `RT_AI_USE_CUBE`** |
-| --flag              | 是否需要删除 `stm32ai` 生成的中间文件夹 `stm_out` ，默认为`False` |
+| --clear              | 是否需要删除 `stm32ai` 生成的中间文件夹 `stm_out` ，默认为`False` |
 
 # 4.编译
 
@@ -167,16 +172,6 @@ $ scons --target=mdk5
 > 运行该章节的前提是：
 >
 > 你的 ART-Pi BSP 通过 RT-Thread Studio 生成
-
-- [Env 工具](https://www.rt-thread.org/document/site/#)
-
-进入到 `BSP` 项目工程路径，右键打开 Env
-
-执行：
-
-```shell
-$ scons --target=eclipse
-```
 
 在 `RT-Thread Studio` 中，找到项目工程，右键，
 
@@ -280,6 +275,33 @@ $ scons -j 6
 
   ![](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210401192319.png)
 
+这时候你就已经成功获得了一个集成了 `AI` 和 `RT-Thread` 的新的 `ART-Pi BSP`，
+
+就可以`RT-Thread` 系统上做应用开发啦。
+
+## 示例应用代码提供
+
+我们提供了一份运行模型推理的示例应用代码，可参考 [6. RT-AK MNIST 应用参考示例](# 6. RT-AK MNIST 应用参考示例)，也可直接下载。
+
+- [mnist_app.c](http://117.143.63.254:9012/www/RT-AK/mnist_app.zip)：
+
+1. 下载解压，放置到 `<BSP>/applications` 路径下
+
+![image-20210409192729527](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210409192730.png)
+
+2. 选中 RT-Thread Studio 中的 项目工程，右击刷新
+
+![image-20210409193019579](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210409193022.png)
+
+3. 编译烧录，
+4. 输入命令：`mnsit_app`
+
+![image-20210409192638719](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210409192639.png)
+
+---
+
+完整的示例工程：https://github.com/EdgeAIWithRTT/Project3-Mnist_Cube_RTT/tree/master/Mnist_RTT
+
 # 6. RT-AK MNIST 应用参考示例
 
 ```c
@@ -334,5 +356,5 @@ int mnist_app(void){
 MSH_CMD_EXPORT(mnist_app,mnist demo);
 ```
 
-应用开发 `API` 见 [rt_ai_lib/readme](../../../../rt_ai_lib/readme.md)
+应用开发 `API` 见 [rt_ai_lib/readme](../rt_ai_lib)
 
