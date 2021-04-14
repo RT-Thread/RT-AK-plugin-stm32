@@ -1,195 +1,195 @@
 
 
-<center><h1>RT-AK Ö® STM32</h1></center>
+<center><h1>RT-AK ä¹‹ STM32</h1></center>
 
-- [¼ò½é](#¼ò½é)
-- [Ä¿Â¼½á¹¹](#Ä¿Â¼½á¹¹)
-- [²ÎÊıËµÃ÷](#²ÎÊıËµÃ÷)
-- [ÔËĞĞ](#ÔËĞĞ)
-  - [1 »ù´¡ÔËĞĞÃüÁî](#1 »ù´¡ÔËĞĞÃüÁî)
-  - [2 Ö¸¶¨²ÎÊıÔËĞĞ](#2 Ö¸¶¨²ÎÊıÔËĞĞ)
-- [¹¦ÄÜÁĞ±í](#¹¦ÄÜÁĞ±í)
+- [ç®€ä»‹](#ç®€ä»‹)
+- [ç›®å½•ç»“æ„](#ç›®å½•ç»“æ„)
+- [å‚æ•°è¯´æ˜](#å‚æ•°è¯´æ˜)
+- [è¿è¡Œ](#è¿è¡Œ)
+  - [1 åŸºç¡€è¿è¡Œå‘½ä»¤](##1åŸºç¡€è¿è¡Œå‘½ä»¤)
+  - [2 æŒ‡å®šå‚æ•°è¿è¡Œ](##2æŒ‡å®šå‚æ•°è¿è¡Œ)
+- [åŠŸèƒ½åˆ—è¡¨](#åŠŸèƒ½åˆ—è¡¨)
 
-## ¼ò½é
+## ç®€ä»‹
 
-*±¾ÏîÄ¿¹éÊôÓÚ `RT-AK` Ö÷ÏîÄ¿ÖĞµÄÒ»¸ö×ÓÄ£¿é¡£*
+*æœ¬é¡¹ç›®å½’å±äº `RT-AK` ä¸»é¡¹ç›®ä¸­çš„ä¸€ä¸ªå­æ¨¡å—ã€‚*
 
-Ê¹ÓÃ `STM32` Ô­³§²å¼ş½øĞĞ¿ª·¢¡£
+ä½¿ç”¨ `STM32` åŸå‚æ’ä»¶è¿›è¡Œå¼€å‘ã€‚
 
-- Ô­³§²å¼ş£º`X-CUBE-AI`
-- Ä£ĞÍÖ§³Ö£º`Keras | TFLite | ONNX`
+- åŸå‚æ’ä»¶ï¼š`X-CUBE-AI`
+- æ¨¡å‹æ”¯æŒï¼š`Keras | TFLite | ONNX`
 
-## Ä¿Â¼½á¹¹
+## ç›®å½•ç»“æ„
 
 ```shell
 % tree -L 2 stm32 
 stm32
-©À©¤©¤ backend_plugin_stm32
-©¦   ©À©¤©¤ backend_cubeai.c
-©¦   ©À©¤©¤ backend_cubeai.h
-©¦   ©¸©¤©¤ readme.md
-©À©¤©¤ config.py  # Éú³É `rt_ai_<model_name>_model.h` µÄÒ»Ğ©ÅäÖÃĞÅÏ¢£¬±£´æÔÚ <BSP>/applications
-©À©¤©¤ docs  # `X-CUBE-AI` Ïà¹ØÎÄµµËµÃ÷£» 
-©¦   ©À©¤©¤ command_line_interface.html
-©¦   ©À©¤©¤ embedded_client_api.html
-©¦   ©À©¤©¤ en.stsw-link009.zip  # `STLink` Çı¶¯
-©¦   ©À©¤©¤ ...
-©¦   ©À©¤©¤ relocatable.html
-©¦   ©À©¤©¤ RT-AKÖ®STM32¿ìËÙÉÏÊÖ.md
-©¦   ©À©¤©¤ stm32.c
-©¦   ©À©¤©¤ stm32programmer-cli.pdf
-©¦   ©¸©¤©¤ Á¿»¯(Î´Íê³É).md
-©À©¤©¤ generate_rt_ai_model_h.py  # Éú³É `rt_ai_<model_name>_model.h` £¬±£´æÔÚ <BSP>/applications
-©À©¤©¤ gen_rt_ai_model_c.py  # Éú³É `rt_ai_<model_name>_model.c` £¬±£´æÔÚ <BSP>/applications
-©À©¤©¤ __init__.py
-©À©¤©¤ plugin_init.py  # ½« `stm32ai` £¨`X-CUBE-AI` µÄÄ£ĞÍ×ª»»¹¤¾ß£©Ìí¼Óµ½ÏµÍ³±äÁ¿
-©À©¤©¤ plugin_stm32_parser.py  # `STM32` Æ½Ì¨²å¼şÔËĞĞËùĞèµÄ²ÎÊı
-©À©¤©¤ plugin_stm32.py  # `STM32` Æ½Ì¨²å¼şÔËĞĞÖ÷º¯Êı
-©À©¤©¤ prepare_work.py  # Éú³ÉÁ½¸öÎÄ¼ş¼Ğ£¬´æ·Å x-cube-ai ¾²Ì¬¿âºÍ c-model ÎÄ¼ş; ¼ÓÔØ¶ÔÓ¦µÄ Sconscript
-©À©¤©¤ README.md
-©À©¤©¤ run_x_cube_ai.py  # ÔËĞĞ `stm32ai` ¹¤¾ß£¬½øĞĞÄ£ĞÍ×ª»»¹¤×÷
-©À©¤©¤ Sconscripts  # Ä£ĞÍ×ª»»Ö®ºó£¬²ÎÓëµ½ÏîÄ¿ `scons` ±àÒëµÄ½Å±¾ÎÄ¼ş
-©¦   ©À©¤©¤ Middlewares
-©¦   ©¸©¤©¤ X-CUBE-AI
-©¸©¤©¤ X-CUBE-AI.5.2.0  # `STM32Cube.AI` ËùÌá¹©µÄ¾²Ì¬¿â
-    ©À©¤©¤ Copyrights.txt
-    ©¸©¤©¤ Middlewares
+â”œâ”€â”€ backend_plugin_stm32
+â”‚   â”œâ”€â”€ backend_cubeai.c
+â”‚   â”œâ”€â”€ backend_cubeai.h
+â”‚   â””â”€â”€ readme.md
+â”œâ”€â”€ config.py  # ç”Ÿæˆ `rt_ai_<model_name>_model.h` çš„ä¸€äº›é…ç½®ä¿¡æ¯ï¼Œä¿å­˜åœ¨ <BSP>/applications
+â”œâ”€â”€ docs  # `X-CUBE-AI` ç›¸å…³æ–‡æ¡£è¯´æ˜ï¼› 
+â”‚   â”œâ”€â”€ command_line_interface.html
+â”‚   â”œâ”€â”€ embedded_client_api.html
+â”‚   â”œâ”€â”€ en.stsw-link009.zip  # `STLink` é©±åŠ¨
+â”‚   â”œâ”€â”€ ...
+â”‚   â”œâ”€â”€ relocatable.html
+â”‚   â”œâ”€â”€ RT-AKä¹‹STM32å¿«é€Ÿä¸Šæ‰‹.md
+â”‚   â”œâ”€â”€ stm32.c
+â”‚   â”œâ”€â”€ stm32programmer-cli.pdf
+â”‚   â””â”€â”€ é‡åŒ–(æœªå®Œæˆ).md
+â”œâ”€â”€ generate_rt_ai_model_h.py  # ç”Ÿæˆ `rt_ai_<model_name>_model.h` ï¼Œä¿å­˜åœ¨ <BSP>/applications
+â”œâ”€â”€ gen_rt_ai_model_c.py  # ç”Ÿæˆ `rt_ai_<model_name>_model.c` ï¼Œä¿å­˜åœ¨ <BSP>/applications
+â”œâ”€â”€ __init__.py
+â”œâ”€â”€ plugin_init.py  # å°† `stm32ai` ï¼ˆ`X-CUBE-AI` çš„æ¨¡å‹è½¬æ¢å·¥å…·ï¼‰æ·»åŠ åˆ°ç³»ç»Ÿå˜é‡
+â”œâ”€â”€ plugin_stm32_parser.py  # `STM32` å¹³å°æ’ä»¶è¿è¡Œæ‰€éœ€çš„å‚æ•°
+â”œâ”€â”€ plugin_stm32.py  # `STM32` å¹³å°æ’ä»¶è¿è¡Œä¸»å‡½æ•°
+â”œâ”€â”€ prepare_work.py  # ç”Ÿæˆä¸¤ä¸ªæ–‡ä»¶å¤¹ï¼Œå­˜æ”¾ x-cube-ai é™æ€åº“å’Œ c-model æ–‡ä»¶; åŠ è½½å¯¹åº”çš„ Sconscript
+â”œâ”€â”€ README.md
+â”œâ”€â”€ run_x_cube_ai.py  # è¿è¡Œ `stm32ai` å·¥å…·ï¼Œè¿›è¡Œæ¨¡å‹è½¬æ¢å·¥ä½œ
+â”œâ”€â”€ Sconscripts  # æ¨¡å‹è½¬æ¢ä¹‹åï¼Œå‚ä¸åˆ°é¡¹ç›® `scons` ç¼–è¯‘çš„è„šæœ¬æ–‡ä»¶
+â”‚   â”œâ”€â”€ Middlewares
+â”‚   â””â”€â”€ X-CUBE-AI
+â””â”€â”€ X-CUBE-AI.5.2.0  # `STM32Cube.AI` æ‰€æä¾›çš„é™æ€åº“
+    â”œâ”€â”€ Copyrights.txt
+    â””â”€â”€ Middlewares
 ```
 
-## ²ÎÊıËµÃ÷
+## å‚æ•°è¯´æ˜
 
-> Ïê¼û `plugin_stm32_parser.py` 
+> è¯¦è§ `plugin_stm32_parser.py` 
 
 | Parameter           | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
-| **`--ext_tools`**   | **`X-CUBE-AI` ´æ·ÅÂ·¾¶£¬Ä£ĞÍ×ª»»¹¤¾ß£¬ÄÚÓĞ `stm32ai` ¿ÉÖ´ĞĞÈí¼ş£¬ĞèÒªÓÃ»§Ö¸¶¨** |
-| `--cube_ai`         | `X-CUBE-AI` ÔËĞĞËùĞèµÄ¾²Ì¬¿â£¬Ä¬ÈÏÎª`./platforms/stm32/X-CUBE-AI.5.2.0` |
-| `--rt_ai_example`   | ´æ·Å`rt_ai_<model_name>_model.c` Ê¾ÀıÎÄ¼ş£¬Ä¬ÈÏÊÇ `./platforms/stm32/docs` |
-| `--stm_out`         | ¾­¹ı `stm32ai` Ïß³Ì´¦ÀíÖ®ºó²úÉúµÄÖĞ¼äÎÄ¼ş¼ĞÂ·¾¶£¬Ä¬ÈÏÊÇµ±ÌìµÄÊ±¼ä´ÁÃüÃû |
-| `--workspace`       | `stm32ai` ÔËĞĞÊ±²úÉúµÄÁÙÊ±¹¤×÷Çø£¬Ä¬ÈÏÊÇ`./stm32ai_ws`       |
-| `--val_data`        | Ä¬ÈÏÎª¿Õ£¬¼´Ê¹ÓÃÄÚ²¿×ÔÉú³ÉµÄËæ»úÊı¾İ¼¯£¬ÔÊĞíÓÃ»§×Ô¶¨Òå²âÊÔÊı¾İ¼¯£¬ |
-| `--compress`        | ±íÊ¾½«Ó¦ÓÃµÄÈ«¾ÖÑ¹ËõÒò×Ó£¬½öÓ¦ÓÃÔÚÈ«Á¬½Ó²ã£¬¿ÉÑ¡ "1\|4\|8"£¬Ä¬ÈÏÖµ£º`1` |
-| `--batches`         | Ö¸Ê¾Éú³ÉÁË¶àÉÙËæ»úÊı¾İÑù±¾£¬Ä¬ÈÏÊÇ`10`                       |
-| `--mode`            | "analyze\|validate" Ä£Ê½£¨¿ÉÑ¡£©+¡±generate¡°Ä£Ê½£¨±ØĞëÓĞ£©£¬`1`±íÊ¾Ñ¡ÖĞ£¬ÔÚ`{'001', '011', '101', '111'}`ÖĞÑ¡Ò»¸ö£¬Ä¬ÈÏÊÇ `001` |
-| **--network**       | **ÔÚ `Documents` ÖĞµÄÄ£°åÎÄ¼şµÄÄ£ĞÍÃû£¬Ä¬ÈÏÊÇ `mnist`**      |
-| **--enable_rt_lib** | **ÔÚ `project/rtconfgi.h` ÖĞ´ò¿ªºê¶¨Òå£¬Ä¬ÈÏÊÇ `RT_AI_USE_CUBE`** |
-| --clear              | ÊÇ·ñĞèÒªÉ¾³ı `stm32ai` Éú³ÉµÄÖĞ¼äÎÄ¼ş¼Ğ `stm_out` £¬Ä¬ÈÏÎª`False` |
+| **`--ext_tools`**   | **`X-CUBE-AI` å­˜æ”¾è·¯å¾„ï¼Œæ¨¡å‹è½¬æ¢å·¥å…·ï¼Œå†…æœ‰ `stm32ai` å¯æ‰§è¡Œè½¯ä»¶ï¼Œéœ€è¦ç”¨æˆ·æŒ‡å®š** |
+| `--cube_ai`         | `X-CUBE-AI` è¿è¡Œæ‰€éœ€çš„é™æ€åº“ï¼Œé»˜è®¤ä¸º`./platforms/stm32/X-CUBE-AI.5.2.0` |
+| `--rt_ai_example`   | å­˜æ”¾`rt_ai_<model_name>_model.c` ç¤ºä¾‹æ–‡ä»¶ï¼Œé»˜è®¤æ˜¯ `./platforms/stm32/docs` |
+| `--stm_out`         | ç»è¿‡ `stm32ai` çº¿ç¨‹å¤„ç†ä¹‹åäº§ç”Ÿçš„ä¸­é—´æ–‡ä»¶å¤¹è·¯å¾„ï¼Œé»˜è®¤æ˜¯å½“å¤©çš„æ—¶é—´æˆ³å‘½å |
+| `--workspace`       | `stm32ai` è¿è¡Œæ—¶äº§ç”Ÿçš„ä¸´æ—¶å·¥ä½œåŒºï¼Œé»˜è®¤æ˜¯`./stm32ai_ws`       |
+| `--val_data`        | é»˜è®¤ä¸ºç©ºï¼Œå³ä½¿ç”¨å†…éƒ¨è‡ªç”Ÿæˆçš„éšæœºæ•°æ®é›†ï¼Œå…è®¸ç”¨æˆ·è‡ªå®šä¹‰æµ‹è¯•æ•°æ®é›†ï¼Œ |
+| `--compress`        | è¡¨ç¤ºå°†åº”ç”¨çš„å…¨å±€å‹ç¼©å› å­ï¼Œä»…åº”ç”¨åœ¨å…¨è¿æ¥å±‚ï¼Œå¯é€‰ "1\|4\|8"ï¼Œé»˜è®¤å€¼ï¼š`1` |
+| `--batches`         | æŒ‡ç¤ºç”Ÿæˆäº†å¤šå°‘éšæœºæ•°æ®æ ·æœ¬ï¼Œé»˜è®¤æ˜¯`10`                       |
+| `--mode`            | "analyze\|validate" æ¨¡å¼ï¼ˆå¯é€‰ï¼‰+â€generateâ€œæ¨¡å¼ï¼ˆå¿…é¡»æœ‰ï¼‰ï¼Œ`1`è¡¨ç¤ºé€‰ä¸­ï¼Œåœ¨`{'001', '011', '101', '111'}`ä¸­é€‰ä¸€ä¸ªï¼Œé»˜è®¤æ˜¯ `001` |
+| **--network**       | **åœ¨ `Documents` ä¸­çš„æ¨¡æ¿æ–‡ä»¶çš„æ¨¡å‹åï¼Œé»˜è®¤æ˜¯ `mnist`**      |
+| **--enable_rt_lib** | **åœ¨ `project/rtconfgi.h` ä¸­æ‰“å¼€å®å®šä¹‰ï¼Œé»˜è®¤æ˜¯ `RT_AI_USE_CUBE`** |
+| --clear              | æ˜¯å¦éœ€è¦åˆ é™¤ `stm32ai` ç”Ÿæˆçš„ä¸­é—´æ–‡ä»¶å¤¹ `stm_out` ï¼Œé»˜è®¤ä¸º`False` |
 
-- Ê¾Àı£º
+- ç¤ºä¾‹ï¼š
 
   `--ext_tools="D:/Program Files (x86)/stm32ai-windows-5.2.0/windows"`
 
-## ÔËĞĞ
+## è¿è¡Œ
 
-### 1 »ù´¡ÔËĞĞÃüÁî
+### 1 åŸºç¡€è¿è¡Œå‘½ä»¤
 
-ÇëÔÚ `edge-ai/RTAK/tools` Â·¾¶ÏÂÔËĞĞ¸Ã³ÌĞò¡£
+è¯·åœ¨ `edge-ai/RTAK/tools` è·¯å¾„ä¸‹è¿è¡Œè¯¥ç¨‹åºã€‚
 
 ![](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210223145923.png)
 
 ```shell
-# »ù´¡ÔËĞĞÃüÁî
+# åŸºç¡€è¿è¡Œå‘½ä»¤
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --clear
 
-# Ê¾Àı
+# ç¤ºä¾‹
 python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Models/keras_mnist.h5" --platform=stm32 --ext_tools="D:\Program Files (x86)\stm32ai-windows-5.2.0\windows" --clear
 ```
 
 ![image-20210401181247394](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210401181248.png)
 
-### 2 Ö¸¶¨²ÎÊıÔËĞĞ
+### 2 æŒ‡å®šå‚æ•°è¿è¡Œ
 
 ```shell
-# Ö¸¶¨×ª»»Ä£ĞÍµÄÃû³Æ£¬--model_name Ä¬ÈÏÎª network
+# æŒ‡å®šè½¬æ¢æ¨¡å‹çš„åç§°ï¼Œ--model_name é»˜è®¤ä¸º network
 python aitools.py --project=<your_project_path> --model=<your_model_path>  --model_name=<model_name>  --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# ±£´æÔËĞĞ stm32ai Ïß³Ì¹ı³ÌÖĞ²úÉúµÄÎÄ¼ş£¬--clear Ä¬ÈÏÎª¿Õ
-# Èç¹û´æÔÚ£¬Ôò½«»áÉ¾³ı`stm32ai` ÔËĞĞÊ±²úÉúµÄ¹¤×÷ÎÄ¼ş¼Ğ£¬¼´`--stm_out`
+# ä¿å­˜è¿è¡Œ stm32ai çº¿ç¨‹è¿‡ç¨‹ä¸­äº§ç”Ÿçš„æ–‡ä»¶ï¼Œ--clear é»˜è®¤ä¸ºç©º
+# å¦‚æœå­˜åœ¨ï¼Œåˆ™å°†ä¼šåˆ é™¤`stm32ai` è¿è¡Œæ—¶äº§ç”Ÿçš„å·¥ä½œæ–‡ä»¶å¤¹ï¼Œå³`--stm_out`
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# Ö¸¶¨±£´æÔËĞĞÈÕÖ¾, --log Ä¬ÈÏÎª¿Õ
+# æŒ‡å®šä¿å­˜è¿è¡Œæ—¥å¿—, --log é»˜è®¤ä¸ºç©º
 python aitools.py --project=<your_project_path> --model=<your_model_path> --log=./log.log --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# Ö¸¶¨±£´æµÄÎÄ¼ş¼ĞÃû³Æ£¬--stm_out Ä¬ÈÏÊÇµ±ÌìÊ±¼ä£¬±ÈÈç './20210223'
+# æŒ‡å®šä¿å­˜çš„æ–‡ä»¶å¤¹åç§°ï¼Œ--stm_out é»˜è®¤æ˜¯å½“å¤©æ—¶é—´ï¼Œæ¯”å¦‚ './20210223'
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --stm_out <new_dir>
 
-# Ö¸¶¨Éú³ÉµÄ c-model Ãû£¬--c_model_name Ä¬ÈÏÊÇnetwork
+# æŒ‡å®šç”Ÿæˆçš„ c-model åï¼Œ--c_model_name é»˜è®¤æ˜¯network
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --c_model_name=<new_model_name>
 ```
 
-ÍêÕûµÄÏîÄ¿ÊµÕ½Àı³Ì£¬ÇëÔÄ¶Á£º[RT-AKÖ®STM32¿ìËÙÉÏÊÖ.md](./docs/RT-AKÖ®STM32¿ìËÙÉÏÊÖ.md)
+å®Œæ•´çš„é¡¹ç›®å®æˆ˜ä¾‹ç¨‹ï¼Œè¯·é˜…è¯»ï¼š[RT-AKä¹‹STM32å¿«é€Ÿä¸Šæ‰‹.md](./docs/RT-AKä¹‹STM32å¿«é€Ÿä¸Šæ‰‹.md)
 
-## ¹¦ÄÜÁĞ±í
+## åŠŸèƒ½åˆ—è¡¨
 
-- [x] ÅĞ¶ÏÄ£ĞÍÊÇ·ñÖ§³Ö
-- [x] ÅĞ¶Ï `CPU` ÊÇ·ñÖ§³Ö
-- [x] ÉèÖÃ `stm32ai` ÏµÍ³»·¾³±äÁ¿£¬`x-cube-ai`
-- [x] ÔÚ `stm_out` ÏÂÉú³É¾²Ì¬¿âÎÄ¼ş¼ĞºÍ´æ·Å `c-model` µÄÎÄ¼ş¼Ğ
-- [x] ½«Ä£ĞÍ×ª»»³É `c-model`£¬±£´æÔÚ `<stm_out>/X-CUBE-AI` Â·¾¶ÏÂ
-- [x] Éú³É `rt_ai_<model_name>_model.h` ÎÄ¼ş£¬±£´æÔÚ `project/applications` 
-- [x] Éú³É `rt_ai_<model_name>_model.c` ÎÄ¼ş£¬±£´æÔÚ `project/applications` 
-- [x] ¼ÓÔØ `x-cube-ai` µÄ¾²Ì¬¿âµ½ `stm_out` Â·¾¶ÏÂ
-- [x] °Ñ `stm_out` ÄÚµÄÁ½¸ö¹Ø¼üÎÄ¼ş¼Ğ¼ÓÔØµ½ `project` ÏÂ
-- [x] ÔÚ `project` ÖĞÊ¹ÄÜ `HAL_CRC`
-- [x] ÅĞ¶ÏÊÇ·ñÉ¾³ı `stm_out`
+- [x] åˆ¤æ–­æ¨¡å‹æ˜¯å¦æ”¯æŒ
+- [x] åˆ¤æ–­ `CPU` æ˜¯å¦æ”¯æŒ
+- [x] è®¾ç½® `stm32ai` ç³»ç»Ÿç¯å¢ƒå˜é‡ï¼Œ`x-cube-ai`
+- [x] åœ¨ `stm_out` ä¸‹ç”Ÿæˆé™æ€åº“æ–‡ä»¶å¤¹å’Œå­˜æ”¾ `c-model` çš„æ–‡ä»¶å¤¹
+- [x] å°†æ¨¡å‹è½¬æ¢æˆ `c-model`ï¼Œä¿å­˜åœ¨ `<stm_out>/X-CUBE-AI` è·¯å¾„ä¸‹
+- [x] ç”Ÿæˆ `rt_ai_<model_name>_model.h` æ–‡ä»¶ï¼Œä¿å­˜åœ¨ `project/applications` 
+- [x] ç”Ÿæˆ `rt_ai_<model_name>_model.c` æ–‡ä»¶ï¼Œä¿å­˜åœ¨ `project/applications` 
+- [x] åŠ è½½ `x-cube-ai` çš„é™æ€åº“åˆ° `stm_out` è·¯å¾„ä¸‹
+- [x] æŠŠ `stm_out` å†…çš„ä¸¤ä¸ªå…³é”®æ–‡ä»¶å¤¹åŠ è½½åˆ° `project` ä¸‹
+- [x] åœ¨ `project` ä¸­ä½¿èƒ½ `HAL_CRC`
+- [x] åˆ¤æ–­æ˜¯å¦åˆ é™¤ `stm_out`
 
 <details>
-<summary>¹¦ÄÜº¯Êı</summary> 
+<summary>åŠŸèƒ½å‡½æ•°</summary> 
 <pre><code>
-1 Ä£ĞÍÊÇ·ñÖ§³Ö
-- º¯Êı£º`is_valid_model(model, sup_models)`
-- ¹¦ÄÜ£ºÅĞ¶ÏÄ£ĞÍÊÇ·ñÖ§³Ö
+1 æ¨¡å‹æ˜¯å¦æ”¯æŒ
+- å‡½æ•°ï¼š`is_valid_model(model, sup_models)`
+- åŠŸèƒ½ï¼šåˆ¤æ–­æ¨¡å‹æ˜¯å¦æ”¯æŒ
 - input: (model, sup_models_list)
 <br>
-2 cpuÊÇ·ñÖ§³Ö
-- º¯Êı£º`is_valid_cpu(project, sup_cpus, cpu="")`
-- ¹¦ÄÜ£º¸ù¾İ `project/rtconfig.py` Ìá¹©µÄ `CPU` ĞÅÏ¢ÅĞ¶ÏÊÇ·ñÖ§³Ö
+2 cpuæ˜¯å¦æ”¯æŒ
+- å‡½æ•°ï¼š`is_valid_cpu(project, sup_cpus, cpu="")`
+- åŠŸèƒ½ï¼šæ ¹æ® `project/rtconfig.py` æä¾›çš„ `CPU` ä¿¡æ¯åˆ¤æ–­æ˜¯å¦æ”¯æŒ
 - input: (project, sup_cpus)
 - output: cpu
 <br>
-3 ÉèÖÃ»·¾³±äÁ¿
-- º¯Êı£º`set_env(plugin_path)`
-- ¹¦ÄÜ£ºÉèÖÃ `x-cube-ai: stm32.exe` ÎªÏµÍ³±äÁ¿
+3 è®¾ç½®ç¯å¢ƒå˜é‡
+- å‡½æ•°ï¼š`set_env(plugin_path)`
+- åŠŸèƒ½ï¼šè®¾ç½® `x-cube-ai: stm32.exe` ä¸ºç³»ç»Ÿå˜é‡
 - input: (x-cube-ai_path)
 <br>
-4 Éú³ÉÁ½¸öÎÄ¼ş¼Ğ
-- º¯Êı£º`pre_sconscript(aitools_out, stm32_dirs, scons_path="platforms/stm32/Sconscripts")`
-- ¹¦ÄÜ£º
-  1. Éú³ÉÁ½¸öÎÄ¼ş¼Ğ£¬·Ö±ğ´æ·Å `x-cube-ai` ¾²Ì¬¿âºÍ `c-model` ÎÄ¼ş£¬Èç¹ûÖ®Ç°´æÔÚ£¬ÏÈÉ¾³ıÔ­±¾µÄÎÄ¼ş¼Ğ
-  2. ¼ÓÔØ¶ÔÓ¦µÄ `Sconscript`
+4 ç”Ÿæˆä¸¤ä¸ªæ–‡ä»¶å¤¹
+- å‡½æ•°ï¼š`pre_sconscript(aitools_out, stm32_dirs, scons_path="platforms/stm32/Sconscripts")`
+- åŠŸèƒ½ï¼š
+  1. ç”Ÿæˆä¸¤ä¸ªæ–‡ä»¶å¤¹ï¼Œåˆ†åˆ«å­˜æ”¾ `x-cube-ai` é™æ€åº“å’Œ `c-model` æ–‡ä»¶ï¼Œå¦‚æœä¹‹å‰å­˜åœ¨ï¼Œå…ˆåˆ é™¤åŸæœ¬çš„æ–‡ä»¶å¤¹
+  2. åŠ è½½å¯¹åº”çš„ `Sconscript`
 - input: (stm_out, sconscript_dir, ["Middlewares", "X-CUBE-AI"])
 <br>
-5 Ä£ĞÍ×ª»»
-- º¯Êı£º`stm32ai(model, stm_out, c_model_name, sup_modes, ai_params)`
-- ¹¦ÄÜ£º
-  1. ½«Ä£ĞÍ×ª»»³É `c-model`£¬Ö§³ÖÈıÖÖÄ£Ê½£º·ÖÎö¡¢ÑéÖ¤¡¢Éú³É£¨±ØĞëÓĞ£©
-  2. Èç¹ûÓĞ±¨´í£¬¸ù¾İÉú³ÉµÄ `report.txt` ÎÄ¼şÅ×³öÒì³£
+5 æ¨¡å‹è½¬æ¢
+- å‡½æ•°ï¼š`stm32ai(model, stm_out, c_model_name, sup_modes, ai_params)`
+- åŠŸèƒ½ï¼š
+  1. å°†æ¨¡å‹è½¬æ¢æˆ `c-model`ï¼Œæ”¯æŒä¸‰ç§æ¨¡å¼ï¼šåˆ†æã€éªŒè¯ã€ç”Ÿæˆï¼ˆå¿…é¡»æœ‰ï¼‰
+  2. å¦‚æœæœ‰æŠ¥é”™ï¼Œæ ¹æ®ç”Ÿæˆçš„ `report.txt` æ–‡ä»¶æŠ›å‡ºå¼‚å¸¸
 - input: (model, stm_out, c_model_name, sup_modes_list, [workspace, compress, batches, mode, val_data])
-- output: flag_list, etc: [False, True, True] ¶ÔÓ¦ modes=¡°011¡± ÈıÖÖÄ£ĞÍÖ´ĞĞÊÇ·ñ³É¹¦
+- output: flag_list, etc: [False, True, True] å¯¹åº” modes=â€œ011â€ ä¸‰ç§æ¨¡å‹æ‰§è¡Œæ˜¯å¦æˆåŠŸ
 <br>
-6.1 Éú³É rt_ai_model.h
-- º¯Êı£º`rt_ai_model_gen(stm_out, project, model_name)`
-- ¹¦ÄÜ£º¸ù¾İÉú³ÉµÄ `c-model` ÎÄ¼şÉú³É  `rt_ai_<model_name>_model.h` ÎÄ¼ş£¬±£´æÔÚ `project/applications` 
+6.1 ç”Ÿæˆ rt_ai_model.h
+- å‡½æ•°ï¼š`rt_ai_model_gen(stm_out, project, model_name)`
+- åŠŸèƒ½ï¼šæ ¹æ®ç”Ÿæˆçš„ `c-model` æ–‡ä»¶ç”Ÿæˆ  `rt_ai_<model_name>_model.h` æ–‡ä»¶ï¼Œä¿å­˜åœ¨ `project/applications` 
 - input: (stm_out, project, c_model_name)
 <br>
-6.2 Éú³É rt_ai_model.c
-- º¯Êı£º`load_rt_ai_example(project, rt_ai_example, platform, old_name, new_name)`
-- ¹¦ÄÜ£º¸ù¾İÌá¹©µÄÄ£°åÎÄ¼ş£¬Éú³É `rt_ai_<model_name>_model.c` + `rt_ai_template.c/h`ÎÄ¼ş£¬±£´æÔÚ `project/applications` 
+6.2 ç”Ÿæˆ rt_ai_model.c
+- å‡½æ•°ï¼š`load_rt_ai_example(project, rt_ai_example, platform, old_name, new_name)`
+- åŠŸèƒ½ï¼šæ ¹æ®æä¾›çš„æ¨¡æ¿æ–‡ä»¶ï¼Œç”Ÿæˆ `rt_ai_<model_name>_model.c` + `rt_ai_template.c/h`æ–‡ä»¶ï¼Œä¿å­˜åœ¨ `project/applications` 
 - input: (project, rt_ai_exampl_path, platform, default_model_name, c_model_name)
 <br>
-7 ¼ÓÔØ x-cube-ai libs
-- º¯Êı£º`load_lib(stm_out, cube_ai_path, cpu, middle=r"Middlewares/ST/AI")`
-- ¹¦ÄÜ£º¼ÓÔØ `x-cube-ai` ¾²Ì¬¿âµ½ `stm_out` ÖĞ
+7 åŠ è½½ x-cube-ai libs
+- å‡½æ•°ï¼š`load_lib(stm_out, cube_ai_path, cpu, middle=r"Middlewares/ST/AI")`
+- åŠŸèƒ½ï¼šåŠ è½½ `x-cube-ai` é™æ€åº“åˆ° `stm_out` ä¸­
 - input: (stm_out, cube_ai_path, cpu, middle=r"Middlewares/ST/AI")
 <br>
-8 ¼ÓÔØµ½ project
-- º¯Êı£º`load_to_project(stm_out, project, stm32_dirs)`
-- ¹¦ÄÜ£º¼ÓÔØ `stm_out` Á½¸öÎÄ¼ş¼Ğµ½ `project` ÖĞ¡£Èç¹ûÖ®Ç°ÓĞ´æÔÚ£¬ÔòÏÈÉ¾³ı
+8 åŠ è½½åˆ° project
+- å‡½æ•°ï¼š`load_to_project(stm_out, project, stm32_dirs)`
+- åŠŸèƒ½ï¼šåŠ è½½ `stm_out` ä¸¤ä¸ªæ–‡ä»¶å¤¹åˆ° `project` ä¸­ã€‚å¦‚æœä¹‹å‰æœ‰å­˜åœ¨ï¼Œåˆ™å…ˆåˆ é™¤
 - input: (stm_out, project, ["Middlewares", "X-CUBE-AI"])
 <br>
-9 Ê¹ÄÜ HAL-CRC
-- º¯Êı£º`enable_hal_crc(project)`
-- ¹¦ÄÜ£ºÔÚ `project/board/...` ÎÄ¼şÖĞÊ¹ÄÜ `HAL_CRC_MODULE_ENABLED`
+9 ä½¿èƒ½ HAL-CRC
+- å‡½æ•°ï¼š`enable_hal_crc(project)`
+- åŠŸèƒ½ï¼šåœ¨ `project/board/...` æ–‡ä»¶ä¸­ä½¿èƒ½ `HAL_CRC_MODULE_ENABLED`
 - input: (project)
 </code></pre>
 </details>
