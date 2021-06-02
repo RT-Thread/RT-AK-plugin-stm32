@@ -146,7 +146,7 @@ class Plugin(object):
         for dir in os.listdir(stm_lib):
             if cpu in dir:
                 lib_path = stm_lib / dir
-                lib_path = list(lib_path.iterdir())[0]
+                lib_path = list(filter(lambda path: "PIC" not in path.name, lib_path.iterdir()))[0]
                 filename = "lib" + lib_path.name if stm_lib.name[:3] == "GCC" \
                     else lib_path.name
                 return lib_path, filename
