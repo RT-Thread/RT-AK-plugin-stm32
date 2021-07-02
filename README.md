@@ -4,11 +4,12 @@
 
 - [简介](#简介)
 - [目录结构](#目录结构)
-- [参数说明](#参数说明)
-- [运行](#运行)
+- [命令行参数详细说明](#命令行参数详细说明)
+- [插件安装](#插件安装)
+- [命令行运行 RT-AK](#命令行运行-RT-AK)
   - [1 基础运行命令](#1-基础运行命令)
   - [2 指定参数运行](#2-指定参数运行)
-- [功能列表](#功能列表)
+- [插件内部工作流程](#插件内部工作流程)
 
 ## 简介
 
@@ -60,9 +61,21 @@ stm32
     └── Middlewares
 ```
 
-## 参数说明
+## 命令行参数详细说明
 
-> 详见 `plugin_stm32_parser.py` 
+## 
+
+$$
+RT-AK 命令行的参数 = （RT-AK 基础参数 + STM32 插件参数）
+$$
+
+- RT-AK 基础参数，[链接](https://github.com/RT-Thread/RT-AK/tree/main/RT-AK/rt_ai_tools#0x03-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)
+
+- 该部分是 RT-AK 之 STM32 插件的参数说明，详见 `plugin_stm32_parser.py` 
+
+其中需要注意的是加粗部分的三个参数，请注意看相关描述。
+
+详细的使用说明请阅读后续章节
 
 | Parameter           | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
@@ -83,7 +96,17 @@ stm32
 
   `--ext_tools="D:/Program Files (x86)/stm32ai-windows-5.2.0/windows"`
 
-## 运行
+## 插件安装
+
+该插件无需主动安装，
+
+只需要克隆主项目工程：[RT-AK](https://github.com/RT-Thread/RT-AK)
+
+进入到 `RT-AK/rt_ai_tools` 路径下，
+
+**仅需要**在执行 `python aitools.py --xxx` 的同时指定 `platform` 参数为 `stm32` 即可，插件会自动下载。
+
+## 命令行运行 RT-AK
 
 ### 1 基础运行命令
 
@@ -123,7 +146,7 @@ python aitools.py --project=<your_project_path> --model=<your_model_path> --plat
 
 完整的项目实战例程，请阅读：[RT-AK之STM32快速上手.md](./docs/RT-AK之STM32快速上手.md)
 
-## 功能列表
+## 插件内部工作流程
 
 - [ ] 模型量化
 
