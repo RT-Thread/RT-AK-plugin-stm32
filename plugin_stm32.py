@@ -24,6 +24,10 @@
 
 @ Update:   remove template .c/.h
 @ Date:     2021/03/12
+
+@ Update:   1. move self.model_path to abspath
+            2. fix model_name lower.
+@ Date:     2021/08/02
 '''
 import os
 import sys
@@ -54,10 +58,11 @@ def readonly_handler(func, path):
 class Plugin(object):
     def __init__(self, opt):
         self.project = opt.project  # project path
-        self.model_path = opt.model  # model path
+        # self.model_path = os.path.abspath(opt.model)  # model path
+        self.model_path = opt.model
         self.rt_ai_example = opt.rt_ai_example  # Documents
         self.platform = opt.platform
-        self.c_model_name = opt.model_name  # c model name
+        self.c_model_name = opt.model_name.lower()  # c model name
 
         # config.py
         self.sup_models = sup_models

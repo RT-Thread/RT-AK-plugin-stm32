@@ -8,6 +8,9 @@
 
 @ Author:  Lebhoryi@gmail.com
 @ Date:    2020/12/9 16:58
+
+@ Update:  repair --model_path include space
+@ Date:    2021/08/02
 '''
 import os
 import re
@@ -87,7 +90,7 @@ def stm32ai(model, stm_out, c_model_name, sup_modes, ai_params):
         flag: return the True, list, len(list) == the number of true modes
     """
     def analyze(model, output, model_name, compress):
-        analyze_cmd = "stm32ai analyze -m {} -o {} -w {} -n {} -c {}".format(
+        analyze_cmd = "stm32ai analyze -m \"{}\" -o {} -w {} -n {} -c {}".format(
                        model, output, workspace, model_name, compress)
         return analyze_cmd
 
@@ -95,18 +98,18 @@ def stm32ai(model, stm_out, c_model_name, sup_modes, ai_params):
     def validate(model, output, model_name, batches, val_date):
         if val_date:
             # using random {batches} val data
-            validate_cmd = "stm32ai validate -m {} -o {} -w {} -n {} -vi {} " \
+            validate_cmd = "stm32ai validate -m \"{}\" -o {} -w {} -n {} -vi {} " \
                            "--validate.batch_mode {} -b {}".format(model,
                                                                    output, workspace, model_name, val_date, "random", batches)
         else:
-            validate_cmd = "stm32ai validate -m {} -o {} -w {} -n {} -b {}".format(
+            validate_cmd = "stm32ai validate -m \"{}\" -o {} -w {} -n {} -b {}".format(
                             model, output, workspace, model_name, batches)
         return validate_cmd
 
 
     def generate(model, output, model_name, compress):
         # generate the dir "X-CUBE-AI/App"
-        generate_cmd = "stm32ai generate -m {} -o {} -w {} -n {} -c {}".format(
+        generate_cmd = "stm32ai generate -m \"{}\" -o {} -w {} -n {} -c {}".format(
             model, output, workspace, model_name, compress)
         return generate_cmd
 
