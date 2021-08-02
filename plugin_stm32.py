@@ -25,7 +25,8 @@
 @ Update:   remove template .c/.h
 @ Date:     2021/03/12
 
-@ Update:   move self.model_path to abspath
+@ Update:   1. move self.model_path to abspath
+            2. fix model_name lower.
 @ Date:     2021/08/02
 '''
 import os
@@ -61,7 +62,7 @@ class Plugin(object):
         self.model_path = opt.model
         self.rt_ai_example = opt.rt_ai_example  # Documents
         self.platform = opt.platform
-        self.c_model_name = opt.model_name  # c model name
+        self.c_model_name = opt.model_name.lower()  # c model name
 
         # config.py
         self.sup_models = sup_models
