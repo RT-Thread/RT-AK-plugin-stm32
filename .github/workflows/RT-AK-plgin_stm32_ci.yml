@@ -38,7 +38,7 @@ jobs:
 
     - name: Install X-CUBE-AI
       run: |
-        wget -q https://drive.google.com/file/d/1FVoXEaE-GLx1sjtdrKkPX33gnOqieVkO/view?usp=sharing
+        wget -q http://117.143.63.254:9012/www/RT-AK/stm32ai-linux-5.2.0.zip
         unzip stm32ai-linux-5.2.0.zip -d /opt/x-cube-ai
         /opt/x-cube-ai/linux/stm32ai --version
 
