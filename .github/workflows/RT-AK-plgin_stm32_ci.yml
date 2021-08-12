@@ -19,9 +19,9 @@ jobs:
       
     - name: Install dependecies
       run: |
-        sudo apt-get -yqq install scons unzip git
+        sudo apt-get -yqq install unzip git
         python -m pip install --upgrade pip
-        pip install flake8 pytest
+        pip install flake8 pytest scons
     
     - name: Lint with flake8
       run: |
@@ -39,16 +39,16 @@ jobs:
     - name: Install X-CUBE-AI
       run: |
         wget -q http://117.143.63.254:9012/www/RT-AK/stm32ai-linux-5.2.0.zip
-        unzip stm32ai-linux-5.2.0.zip -d /opt/x-cube-ai
+        unzip -q stm32ai-linux-5.2.0.zip -d /opt/x-cube-ai
         /opt/x-cube-ai/linux/stm32ai --version
 
     - name: Prepare ART-Pi BSP
       run: |
-        git clone https://github.com/EdgeAIWithRTT/ART-Pi_BSP $TEST_BSP_ROOT
+        git clone https://github.com/EdgeAIWithRTT/ART-Pi_BSP.git --depth 1 $TEST_BSP_ROOT
 
     - name: Run RT-AK
       run: |
-        git clone https://github.com/RT-Thread/RT-AK.git
+        git clone https://github.com/RT-Thread/RT-AK.git --depth 1
         pushd RT-AK/RT-AK/rt_ai_tools
         python aitools.py --project=../../../$TEST_BSP_ROOT --platform=stm32 --ext_tools=/opt/x-cube-ai/linux --clear
         popd
