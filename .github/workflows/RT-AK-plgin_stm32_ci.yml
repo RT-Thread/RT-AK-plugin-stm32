@@ -56,9 +56,16 @@ jobs:
     - name: Build BSP
       run: |
         export RTT_EXEC_PATH=/opt/gcc-arm-none-eabi-6-2017-q2-update/bin
-        scons --pyconfig-silent -C $TEST_BSP_ROOT
         scons -j$(nproc) -C $TEST_BSP_ROOT
+        cp $TEST_BSP_ROOT/rtthread.bin .
         echo "Compile done."
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with: 
+        name: artpi_sdk_with_mnist
+        path: ${{github.workspace}}/rtthread.bin
+        if-no-files-found: error
 
     # app test
 
