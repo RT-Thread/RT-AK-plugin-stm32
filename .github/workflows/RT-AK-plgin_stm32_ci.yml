@@ -19,7 +19,7 @@ jobs:
       
     - name: Install dependecies
       run: |
-        sudo apt-get -yqq install scons qemu-system git
+        sudo apt-get -yqq install scons unzip git
         python -m pip install --upgrade pip
         pip install flake8 pytest
     
