@@ -39,7 +39,7 @@ jobs:
     - name: Install X-CUBE-AI
       run: |
         wget -q https://drive.google.com/file/d/1FVoXEaE-GLx1sjtdrKkPX33gnOqieVkO/view?usp=sharing
-        upzip stm32ai-linux-5.2.0.zip -d /opt/x-cube-ai
+        unzip stm32ai-linux-5.2.0.zip -d /opt/x-cube-ai
         /opt/x-cube-ai/linux/stm32ai --version
 
     - name: Prepare ART-Pi BSP
