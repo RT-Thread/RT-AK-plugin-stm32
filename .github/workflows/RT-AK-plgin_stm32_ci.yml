@@ -1,0 +1,72 @@
+name: RT-AK with plugin-stm32 CI
+
+on: [push, pull_request]
+
+jobs:
+  RT-AK-Github-Actions:
+    runs-on: ubuntu-18.04
+    env:
+      TEST_BSP_ROOT: ../AutoTestBsp
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2.2.1
+      with:
+        python-version: 3.7
+      
+    - name: Install dependecies
+      run: |
+        sudo apt-get -yqq install unzip git
+        python -m pip install --upgrade pip
+        pip install flake8 pytest scons
+    
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Install Arm ToolChains
+      run: |
+        wget -q https://github.com/RT-Thread/toolchains-ci/releases/download/arm-2017q2-v6/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2 
+        sudo tar xjf gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2 -C /opt
+        /opt/gcc-arm-none-eabi-6-2017-q2-update/bin/arm-none-eabi-gcc --version
+
+    - name: Install X-CUBE-AI
+      run: |
+        wget -q http://117.143.63.254:9012/www/RT-AK/stm32ai-linux-5.2.0.zip
+        unzip -q stm32ai-linux-5.2.0.zip -d /opt/x-cube-ai
+        /opt/x-cube-ai/linux/stm32ai --version
+
+    - name: Prepare ART-Pi BSP
+      run: |
+        git clone https://github.com/EdgeAIWithRTT/ART-Pi_BSP.git --depth 1 $TEST_BSP_ROOT
+
+    - name: Run RT-AK
+      run: |
+        git clone https://github.com/RT-Thread/RT-AK.git --depth 1
+        pushd RT-AK/RT-AK/rt_ai_tools
+        python aitools.py --project=../../../$TEST_BSP_ROOT --platform=stm32 --ext_tools=/opt/x-cube-ai/linux --clear
+        popd
+    
+    - name: Build BSP
+      run: |
+        export RTT_EXEC_PATH=/opt/gcc-arm-none-eabi-6-2017-q2-update/bin
+        scons -j$(nproc) -C $TEST_BSP_ROOT
+        cp $TEST_BSP_ROOT/rtthread.bin .
+        echo "Compile done."
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with: 
+        name: artpi_sdk_with_mnist
+        path: ${{github.workspace}}/rtthread.bin
+        if-no-files-found: error
+
+    # app test
+
+    # test case (pytest)
