@@ -68,6 +68,7 @@ def input_and_output_info(model_name):
         # the 5 head lines
             f"#ifndef __RT_AI_{model_name_upper}_MODEL_H\n",
             f"#define __RT_AI_{model_name_upper}_MODEL_H\n\n",
+            f"#include <{model_name}.h>\n\n",
             "/* model info ... */\n\n",
             "// model name\n",
             f"#define RT_AI_{model_name_upper}_MODEL_NAME\t\t\t\"{model_name}\"\n\n",],

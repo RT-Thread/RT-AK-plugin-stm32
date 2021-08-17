@@ -58,13 +58,14 @@ def multiple_inputs_and_outputs(cube_ai, rt_ai, num):
 
 
 def handle_inputs_outputs(numbers, cube_ai, rt_ai, line, in_out_size, model_info, size_index,
-                          total_size, rt_ai_total_size):
+                          total_size, rt_ai_total_size, model_name_upper):
     """ 1. get RT_AI_NETWORK_IN/OUT_1_SIZE; RT_AI_NETWORK_IN/OUT_1_SIZE_BYTES, save new list
         2. modify 'model_info' RT_AI_NETWORK_IN/OUT_SIZE_BYTES values
         3. get RT_AI_MNIST_IN_TOTAL_SIZE_BYTES
     """
 
-    value = "(" + line.strip().split("(")[-1]
+    value = line.strip().split("(")[-1]
+    value = value if f"AI_{model_name_upper}" in value else "(" + value
     for i in range(numbers):
         if cube_ai[2*i + 1] in line:
             # size bytes
@@ -106,7 +107,8 @@ def config_input_output_info(model_info, model_name_upper, model_h, cube_ai_info
     input_num, output_num, = 1, 1,
 
     for i, line in enumerate(lines):
-        value = "(" + line.strip().split("(")[-1]
+        value = line.strip().split("(")[-1]
+        value = value if f"AI_{model_name_upper}" in value else "(" + value
         # alignment
         if cube_ai_input_info["cube_ai_alignment"] in line:
             model_info.append(f"{rt_ai_input_info['rt_ai_alignment']}{value}\n\n")
@@ -118,7 +120,7 @@ def config_input_output_info(model_info, model_name_upper, model_h, cube_ai_info
             if input_num > 1:
                 cube_ai_inputs, rt_ai_inputs = multiple_inputs_and_outputs(cube_ai_inputs,
                                                                            rt_ai_inputs, input_num)
-        # per input size bytes
+        # input size bytes
         elif cube_ai_input_info["input_size"] in line:
             model_info.append(rt_ai_input_info["input_size"])
             model_info += lines[i+1:i+2+input_num]
@@ -148,11 +150,11 @@ def config_input_output_info(model_info, model_name_upper, model_h, cube_ai_info
         rt_ai_inputs_size, total_size  = \
             handle_inputs_outputs(input_num, cube_ai_inputs, rt_ai_inputs,line,
                                   rt_ai_inputs_size, model_info, input_size_index,
-                                  total_size, rt_ai_input_info["total_input_size"])
+                                  total_size, rt_ai_input_info["total_input_size"], model_name_upper)
         rt_ai_outputs_size, total_size = \
             handle_inputs_outputs(output_num, cube_ai_outputs, rt_ai_outputs, line,
                                   rt_ai_outputs_size, model_info, output_size_index,
-                                  total_size, rt_ai_output_info["total_output_size"])
+                                  total_size, rt_ai_output_info["total_output_size"], model_name_upper)
 
     # add inputs
     model_info = model_info[:input_size_index+input_num+2] + rt_ai_inputs_size + \
@@ -212,7 +214,7 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
 
     # 1. set env
-    ext_tools = r"D:\Program Files (x86)\stm32ai-windows-5.2.0\windows"
+    ext_tools = r"D:\Program Files (x86)\stm32ai-windows-7.0.0\windows"
     _ = set_env(ext_tools)
 
     # 2. prepare tmp output
@@ -229,9 +231,10 @@ if __name__ == "__main__":
             self.batches = 10
             self.mode = "011"
             self.val_data = ''
+            self.cube_ai = r"D:\Program Files (x86)\Keil_v5\PACK\STMicroelectronics\X-CUBE-AI\7.0.0"
 
     opt = Opt()
-    model = "../../Model/keras_mnist.h5"
+    model = "../../Models/mnist.tflite"
     stm_out = "tmp_cwd"
     c_model_name = "network"
     sup_modes = ["001", "011", "101", "111"]
