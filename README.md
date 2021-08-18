@@ -13,6 +13,21 @@
 
 ## 简介
 
+> Date: 2021/08/18
+>
+> Update: 新增 X-CUBE-AI v7.0.0 支持。只需要下载对应版本的 x-cube-ai 和指定 `--cube_ai` 参数即可，按照下面命令即可运行.
+>
+> 其中 --cube_ai 指定的文件夹已经存在，位于 `RT-AK\rt_ai_tools\platforms\plugin_stm32\X-CUBE-AI.7.0.0`
+>
+> ```shell
+> # 模板
+> python aitools.py --project <bsp> --model_name <model_name> --platform stm32 --ext_tools "D:\Program Files (x86)\stm32ai-windows-7.0.0\windows" --cube_ai platforms\plugin_stm32\X-CUBE-AI.7.0.0 --clear
+> 
+> # 示例
+> D:\Project\edge-ai\RT-AK\rt_ai_tools>python aitools.py --project D:\RT-ThreadStudio\workspace\test --model_name mnist --platform stm32 --ext_tools D:\迅雷下载\stm32ai-windows-7.0.0\windows --cube_ai platforms\plugin_stm32\X-CUBE-AI.7.0.0 --clear
+> ```
+> 
+
 > Date: 2021/06/21
 >
 > Update: 该版本插件尚未支持量化功能，需要量化模型的话请自行研究或者与我们联系，欢迎提 PR，下一个版本将会支持量化功能
@@ -23,6 +38,7 @@
 
 - 原厂插件：`X-CUBE-AI`
 - 模型支持：`Keras | TFLite | ONNX`
+- 算子支持：在 `docs` 文件夹下查阅对应版本的 `layer_support.html` 文件
 
 ## 目录结构
 
