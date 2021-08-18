@@ -256,32 +256,27 @@ class Plugin(object):
         # 1.2 create two dirs and SConscripts
         prepare_work.pre_sconscript(self.stm_out, self.sconscript_path, self.stm32_dirs)
 
-
         # 2. convert model
-        flags_list = run_x_cube_ai.stm32ai(self.model_path, self.stm_out, self.c_model_name, self.sup_modes,
-                                           self.stm32_ai_fixed_params)
-
+        flags_list = run_x_cube_ai.stm32ai(self.model_path, self.stm_out, self.c_model_name,
+                                           self.sup_modes, self.stm32_ai_fixed_params)
 
         # 3.1 generate rt_ai_<model_name>_model.h
-        _ = generate_rt_ai_model_h.rt_ai_model_gen(self.stm_out, self.project, self.c_model_name)
+        _ = generate_rt_ai_model_h.rt_ai_model_gen(self.stm_out, self.project,
+                                                   self.c_model_name, self.rt_ai_example)
 
         # 3.2 load rt_ai_<model_name>_model.c
         _ = gen_rt_ai_model_c.load_rt_ai_example(self.project, self.rt_ai_example, self.platform,
-                                    self.network, self.c_model_name)
-
+                                                 self.network, self.c_model_name)
 
         # 4. load lib from <cube_ai> to <stm_out>
         # copy lib files from stm to current dir
         self.load_lib(self.stm_out, self.cube_ai, self.cpu)
 
-
         # 5. load <stm_out> to project
         self.load_to_project(self.stm_out, self.project, self.stm32_dirs)
 
-
         # 6. hal crc enable
         self.enable_hal_crc(self.project)
-
 
         # 7. remove x-cube-ai output dirs or not
         if os.path.exists(self.stm_out) and self.clear:
