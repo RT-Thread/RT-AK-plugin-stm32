@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<!--
+
+	Modified template for STM32CubeMX.AI purpose
+
+	d0.1: 	jean-michel.delorme@st.com
+			add ST logo and ST footer
+
+	d2.0: 	jean-michel.delorme@st.com
+			add sidenav support
+
+	d2.1: 	jean-michel.delorme@st.com
+			clean-up + optional ai_logo/ai meta data
+			
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.1 — by Tristano Ajmone           
+==============================================================================
+Copyright © Tristano Ajmone, 2017, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License 
+
+Copyright (c) Tristano Ajmone, 2017 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017, released
+under the MIT License (MIT); it contains readaptations of substantial portions
+of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="keywords" content="STM32CubeMX, X-CUBE-AI, Neural Network, Quantization, CLI, Code Generator, Automatic NN mapping tools" />
+  <title>FAQs</title>
+  <style type="text/css">
+.markdown-body{
+	-ms-text-size-adjust:100%;
+	-webkit-text-size-adjust:100%;
+	color:#24292e;
+	font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+	font-size:16px;
+	line-height:1.5;
+	word-wrap:break-word;
+	box-sizing:border-box;
+	min-width:200px;
+	max-width:980px;
+	margin:0 auto;
+	padding:45px;
+	}
+.markdown-body a{
+	color:#0366d6;
+	background-color:transparent;
+	text-decoration:none;
+	-webkit-text-decoration-skip:objects}
+.markdown-body a:active,.markdown-body a:hover{
+	outline-width:0}
+.markdown-body a:hover{
+	text-decoration:underline}
+.markdown-body a:not([href]){
+	color:inherit;text-decoration:none}
+.markdown-body strong{font-weight:600}
+.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{
+	margin-top:24px;
+	margin-bottom:16px;
+	font-weight:600;
+	line-height:1.25}
+.markdown-body h1{
+	font-size:2em;
+	margin:.67em 0;
+	padding-bottom:.3em;
+	border-bottom:1px solid #eaecef}
+.markdown-body h2{
+	padding-bottom:.3em;
+	font-size:1.5em;
+	border-bottom:1px solid #eaecef}
+.markdown-body h3{font-size:1.25em}
+.markdown-body h4{font-size:1em}
+.markdown-body h5{font-size:.875em}
+.markdown-body h6{font-size:.85em;color:#6a737d}
+.markdown-body img{border-style:none}
+.markdown-body svg:not(:root){
+	overflow:hidden}
+.markdown-body hr{
+	box-sizing:content-box;
+	height:.25em;
+	margin:24px 0;
+	padding:0;
+	overflow:hidden;
+	background-color:#e1e4e8;
+	border:0}
+.markdown-body hr::before{display:table;content:""}
+.markdown-body hr::after{display:table;clear:both;content:""}
+.markdown-body input{margin:0;overflow:visible;font:inherit;font-family:inherit;font-size:inherit;line-height:inherit}
+.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}
+.markdown-body *{box-sizing:border-box}.markdown-body blockquote{margin:0}
+.markdown-body ol,.markdown-body ul{padding-left:2em}
+.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}
+.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}
+.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}
+.markdown-body li>p{margin-top:16px}
+.markdown-body li+li{margin-top:.25em}
+.markdown-body dd{margin-left:0}
+.markdown-body dl{padding:0}
+.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}
+.markdown-body dl dd{padding:0 16px;margin-bottom:16px}
+.markdown-body code{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace}
+.markdown-body pre{font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;word-wrap:normal}
+.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}
+.markdown-body blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}
+.markdown-body blockquote>:first-child{margin-top:0}
+.markdown-body blockquote>:last-child{margin-bottom:0}
+.markdown-body table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}
+.markdown-body table th{font-weight:600}
+.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #dfe2e5}
+.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}
+.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}
+.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}
+.markdown-body code{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}
+.markdown-body code::after,.markdown-body code::before{letter-spacing:-.2em;content:"\00a0"}
+.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}
+.markdown-body .highlight{margin-bottom:16px}
+.markdown-body .highlight pre{margin-bottom:0;word-break:normal}
+.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}
+.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}
+.markdown-body pre code::after,.markdown-body pre code::before{content:normal}
+.markdown-body .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}
+.markdown-body kbd{box-shadow:inset 0 -1px 0 #959da5;display:inline-block;padding:3px 5px;font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;color:#444d56;vertical-align:middle;background-color:#fcfcfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5}
+.markdown-body :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}
+.markdown-body .task-list-item{list-style-type:none}
+.markdown-body .task-list-item+.task-list-item{margin-top:3px}
+.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}
+.markdown-body::before{display:table;content:""}
+.markdown-body::after{display:table;clear:both;content:""}
+.markdown-body>:first-child{margin-top:0!important}
+.markdown-body>:last-child{margin-bottom:0!important}
+.Alert,.Error,.Note,.Success,.Warning,.Tips,.HTips{padding:11px;margin-bottom:24px;border-style:solid;border-width:1px;border-radius:4px}
+.Alert p,.Error p,.Note p,.Success p,.Warning p,.Tips p,.HTips p{margin-top:0}
+.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child,.Tips p:last-child,.HTips p:last-child{margin-bottom:0}
+.Alert{color:#246;background-color:#e2eef9;border-color:#bac6d3}
+.Warning{color:#4c4a42;background-color:#fff9ea;border-color:#dfd8c2}
+.Error{color:#911;background-color:#fcdede;border-color:#d2b2b2}
+.Success{color:#22662c;background-color:#e2f9e5;border-color:#bad3be}
+.Note{color:#2f363d;background-color:#f6f8fa;border-color:#d5d8da}
+.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{color:#246;margin-bottom:0}
+.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{color:#4c4a42;margin-bottom:0}
+.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{color:#911;margin-bottom:0}
+.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{color:#22662c;margin-bottom:0}
+.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{color:#2f363d;margin-bottom:0}
+.Tips h1,.Tips h2,.Tips h3,.Tips h4,.Tips h5,.Tips h6{color:#2f363d;margin-bottom:0}
+.HTips h1,.HTips h2,.HTips h3,.HTips h4,.HTips h5,.HTips h6{color:#2f363d;margin-bottom:0}
+.Tips h1:first-child,.Tips h2:first-child,.Tips h3:first-child,.Tips h4:first-child,.Tips h5:first-child,.Tips h6:first-child,.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{margin-top:0}
+h1.title,p.subtitle{text-align:center}
+h1.title.followed-by-subtitle{margin-bottom:0}
+p.subtitle{font-size:1.5em;font-weight:600;line-height:1.25;margin-top:0;margin-bottom:16px;padding-bottom:.3em}
+div.line-block{white-space:pre-line}
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+	pre > code.sourceCode { white-space: pre; position: relative; }
+ pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+ pre > code.sourceCode > span:empty { height: 1.2em; }
+ .sourceCode { overflow: visible; }
+ code.sourceCode > span { color: inherit; text-decoration: inherit; }
+ div.sourceCode { margin: 1em 0; }
+ pre.sourceCode { margin: 0; }
+ @media screen {
+ div.sourceCode { overflow: auto; }
+ }
+ @media print {
+ pre > code.sourceCode { white-space: pre-wrap; }
+ pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+ }
+ pre.numberSource code
+   { counter-reset: source-line 0; }
+ pre.numberSource code > span
+   { position: relative; left: -4em; counter-increment: source-line; }
+ pre.numberSource code > span > a:first-child::before
+   { content: counter(source-line);
+     position: relative; left: -1em; text-align: right; vertical-align: baseline;
+     border: none; display: inline-block;
+     -webkit-touch-callout: none; -webkit-user-select: none;
+     -khtml-user-select: none; -moz-user-select: none;
+     -ms-user-select: none; user-select: none;
+     padding: 0 4px; width: 4em;
+     background-color: #ffffff;
+     color: #a0a0a0;
+   }
+ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+ div.sourceCode
+   { color: #1f1c1b; background-color: #ffffff; }
+ @media screen {
+ pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+ }
+ code span { color: #1f1c1b; } /* Normal */
+ code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+ code span.an { color: #ca60ca; } /* Annotation */
+ code span.at { color: #0057ae; } /* Attribute */
+ code span.bn { color: #b08000; } /* BaseN */
+ code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+ code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+ code span.ch { color: #924c9d; } /* Char */
+ code span.cn { color: #aa5500; } /* Constant */
+ code span.co { color: #898887; } /* Comment */
+ code span.cv { color: #0095ff; } /* CommentVar */
+ code span.do { color: #607880; } /* Documentation */
+ code span.dt { color: #0057ae; } /* DataType */
+ code span.dv { color: #b08000; } /* DecVal */
+ code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+ code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+ code span.fl { color: #b08000; } /* Float */
+ code span.fu { color: #644a9b; } /* Function */
+ code span.im { color: #ff5500; } /* Import */
+ code span.in { color: #b08000; } /* Information */
+ code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+ code span.op { color: #1f1c1b; } /* Operator */
+ code span.ot { color: #006e28; } /* Other */
+ code span.pp { color: #006e28; } /* Preprocessor */
+ code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+ code span.sc { color: #3daee9; } /* SpecialChar */
+ code span.ss { color: #ff5500; } /* SpecialString */
+ code span.st { color: #bf0303; } /* String */
+ code span.va { color: #0057ae; } /* Variable */
+ code span.vs { color: #bf0303; } /* VerbatimString */
+ code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="data:text/css,%3Aroot%20%7B%2D%2Dmain%2Ddarkblue%2Dcolor%3A%20rgb%283%2C35%2C75%29%3B%20%2D%2Dmain%2Dlightblue%2Dcolor%3A%20rgb%2860%2C180%2C230%29%3B%20%2D%2Dmain%2Dpink%2Dcolor%3A%20rgb%28230%2C0%2C126%29%3B%20%2D%2Dmain%2Dyellow%2Dcolor%3A%20rgb%28255%2C210%2C0%29%3B%20%2D%2Dsecondary%2Dgrey%2Dcolor%3A%20rgb%2870%2C70%2C80%29%3B%20%2D%2Dsecondary%2Dgrey%2Dcolor%2D25%3A%20rgb%28209%2C209%2C211%29%3B%20%2D%2Dsecondary%2Dgrey%2Dcolor%2D12%3A%20rgb%28233%2C233%2C234%29%3B%20%2D%2Dsecondary%2Dlightgreen%2Dcolor%3A%20rgb%2873%2C177%2C112%29%3B%20%2D%2Dsecondary%2Dpurple%2Dcolor%3A%20rgb%28140%2C0%2C120%29%3B%20%2D%2Dsecondary%2Ddarkgreen%2Dcolor%3A%20rgb%284%2C87%2C47%29%3B%20%2D%2Dsidenav%2Dfont%2Dsize%3A%2090%25%3B%7Dhtml%20%7Bfont%2Dfamily%3A%20%22Arial%22%2C%20sans%2Dserif%3B%7D%2A%20%7Bxbox%2Dsizing%3A%20border%2Dbox%3B%7D%2Est%5Fheader%20h1%2Etitle%2C%2Est%5Fheader%20p%2Esubtitle%20%7Btext%2Dalign%3A%20left%3B%7D%2Est%5Fheader%20h1%2Etitle%20%7Bborder%2Dcolor%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bmargin%2Dbottom%3A5px%3B%7D%2Est%5Fheader%20p%2Esubtitle%20%7Bcolor%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bfont%2Dsize%3A90%25%3B%7D%2Est%5Fheader%20h1%2Etitle%2Efollowed%2Dby%2Dsubtitle%20%7Bborder%2Dbottom%3A2px%20solid%3Bborder%2Dcolor%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bmargin%2Dbottom%3A5px%3B%7D%2Est%5Fheader%20p%2Erevision%20%7Bdisplay%3A%20inline%2Dblock%3Bwidth%3A70%25%3B%7D%2Est%5Fheader%20div%2Eauthor%20%7Bfont%2Dstyle%3A%20italic%3B%7D%2Est%5Fheader%20div%2Esummary%20%7Bborder%2Dtop%3A%20solid%201px%20%23C0C0C0%3Bbackground%3A%20%23ECECEC%3Bpadding%3A%205px%3B%7D%2Est%5Ffooter%20%7Bfont%2Dsize%3A80%25%3B%7D%2Est%5Ffooter%20img%20%7Bfloat%3A%20right%3B%7D%2Est%5Ffooter%20%2Est%5Fnotice%20%7Bwidth%3A80%25%3B%7D%2Emarkdown%2Dbody%20%23header%2Dsection%2Dnumber%20%7Bfont%2Dsize%3A120%25%3B%7D%2Emarkdown%2Dbody%20h1%20%7Bborder%2Dbottom%3A1px%20solid%3Bborder%2Dcolor%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bpadding%2Dbottom%3A%202px%3Bpadding%2Dtop%3A%2010px%3B%7D%2Emarkdown%2Dbody%20h2%20%7Bpadding%2Dbottom%3A%205px%3Bpadding%2Dtop%3A%2010px%3B%7D%2Emarkdown%2Dbody%20h2%20code%20%7Bbackground%2Dcolor%3A%20rgb%28255%2C%20255%2C%20255%29%3B%7D%23func%2EsourceCode%20%7Bborder%2Dleft%2Dstyle%3A%20solid%3Bborder%2Dcolor%3A%20rgb%280%2C%2032%2C%2082%29%3Bborder%2Dcolor%3A%20rgb%28255%2C%20244%2C%20191%29%3Bborder%2Dwidth%3A%208px%3Bpadding%3A0px%3B%7Dpre%20%3E%20code%20%7Bborder%3A%20solid%201px%20blue%3Bfont%2Dsize%3A60%25%3B%7DcodeXX%20%7Bborder%3A%20solid%201px%20blue%3Bfont%2Dsize%3A60%25%3B%7D%23func%2EsourceXXCode%3A%3Abefore%20%7Bcontent%3A%20%22Synopsis%22%3Bpadding%2Dleft%3A10px%3Bfont%2Dweight%3A%20bold%3B%7Dfigure%20%7Bpadding%3A0px%3Bmargin%2Dleft%3A5px%3Bmargin%2Dright%3A5px%3Bmargin%2Dleft%3A%20auto%3Bmargin%2Dright%3A%20auto%3B%7Dimg%5Bdata%2Dproperty%3D%22center%22%5D%20%7Bdisplay%3A%20block%3Bmargin%2Dtop%3A%2010px%3Bmargin%2Dleft%3A%20auto%3Bmargin%2Dright%3A%20auto%3Bpadding%3A%2010px%3B%7Dfigcaption%20%7Btext%2Dalign%3Aleft%3B%20%20border%2Dtop%3A%201px%20dotted%20%23888%3Bpadding%2Dbottom%3A%2020px%3Bmargin%2Dtop%3A%2010px%3B%7Dh1%20code%2C%20h2%20code%20%7Bfont%2Dsize%3A120%25%3B%7D%09%2Emarkdown%2Dbody%20table%20%7Bwidth%3A%20100%25%3Bmargin%2Dleft%3Aauto%3Bmargin%2Dright%3Aauto%3B%7D%2Emarkdown%2Dbody%20img%20%7Bborder%2Dradius%3A%204px%3Bpadding%3A%205px%3Bdisplay%3A%20block%3Bmargin%2Dleft%3A%20auto%3Bmargin%2Dright%3A%20auto%3Bwidth%3A%20auto%3B%7D%2Emarkdown%2Dbody%20%2Est%5Fheader%20img%2C%20%2Emarkdown%2Dbody%20%7Bborder%3A%20none%3Bborder%2Dradius%3A%20none%3Bpadding%3A%205px%3Bdisplay%3A%20block%3Bmargin%2Dleft%3A%20auto%3Bmargin%2Dright%3A%20auto%3Bwidth%3A%20auto%3Bbox%2Dshadow%3A%20none%3B%7D%2Emarkdown%2Dbody%20%7Bmargin%3A%2010px%3Bpadding%3A%2010px%3Bwidth%3A%20auto%3Bfont%2Dfamily%3A%20%22Arial%22%2C%20sans%2Dserif%3Bcolor%3A%20%2303234B%3Bcolor%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%7D%2Emarkdown%2Dbody%20h1%2C%20%2Emarkdown%2Dbody%20h2%2C%20%2Emarkdown%2Dbody%20h3%20%7B%20%20%20color%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%7D%2Emarkdown%2Dbody%3Ahover%20%7B%7D%2Emarkdown%2Dbody%20%2Econtents%20%7B%7D%2Emarkdown%2Dbody%20%2Etoc%2Dtitle%20%7B%7D%2Emarkdown%2Dbody%20%2Econtents%20li%20%7Blist%2Dstyle%2Dtype%3A%20none%3B%7D%2Emarkdown%2Dbody%20%2Econtents%20ul%20%7Bpadding%2Dleft%3A%2010px%3B%7D%2Emarkdown%2Dbody%20%2Econtents%20a%20%7Bcolor%3A%20%233CB4E6%3B%20%7D%2Emarkdown%2Dbody%20table%20%2Eheader%20%7Bbackground%2Dcolor%3A%20var%28%2D%2Dsecondary%2Dgrey%2Dcolor%2D12%29%3Bborder%2Dbottom%3A1px%20solid%3Bborder%2Dtop%3A1px%20solid%3Bfont%2Dsize%3A%2090%25%3B%7D%2Emarkdown%2Dbody%20table%20th%20%7Bfont%2Dweight%3A%20bolder%3B%20%7D%2Emarkdown%2Dbody%20table%20td%20%7Bfont%2Dsize%3A%2090%25%3B%7D%2Emarkdown%2Dbody%20code%7Bpadding%3A%200%3Bmargin%3A0%3Bfont%2Dsize%3A95%25%3Bbackground%2Dcolor%3Argba%2827%2C31%2C35%2C%2E05%29%3Bborder%2Dradius%3A1px%3B%7D%2ETips%20%7Bpadding%3A11px%3Bmargin%2Dbottom%3A24px%3Bborder%2Dstyle%3Asolid%3Bborder%2Dwidth%3A1px%3Bborder%2Dradius%3A1px%7D%2ETips%20%7Bcolor%3A%232f363d%3B%20background%2Dcolor%3A%20%23f6f8fa%3Bborder%2Dcolor%3A%23d5d8da%3Bborder%2Dtop%3A1px%20solid%3Bborder%2Dbottom%3A1px%20solid%3B%7D%2EHTips%20%7Bpadding%3A11px%3Bmargin%2Dbottom%3A24px%3Bborder%2Dstyle%3Asolid%3Bborder%2Dwidth%3A1px%3Bborder%2Dradius%3A1px%7D%2EHTips%20%7Bcolor%3A%232f363d%3B%20background%2Dcolor%3A%23fff9ea%3Bborder%2Dcolor%3A%23d5d8da%3Bborder%2Dtop%3A1px%20solid%3Bborder%2Dbottom%3A1px%20solid%3B%7D%2EHTips%20h1%2C%2EHTips%20h2%2C%2EHTips%20h3%2C%2EHTips%20h4%2C%2EHTips%20h5%2C%2EHTips%20h6%20%7Bcolor%3A%232f363d%3Bmargin%2Dbottom%3A0%7D%2Esidenav%20%7Bfont%2Dfamily%3A%20%22Arial%22%2C%20sans%2Dserif%3B%20%20color%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bheight%3A%20100%25%3Bposition%3A%20fixed%3Bz%2Dindex%3A%201%3Btop%3A%200%3Bleft%3A%200%3Bmargin%2Dright%3A%2010px%3Bmargin%2Dleft%3A%2010px%3B%20overflow%2Dx%3A%20hidden%3B%7D%2Esidenav%20hr%2Enew1%20%7Bborder%2Dwidth%3A%20thin%3Bborder%2Dcolor%3A%20var%28%2D%2Dmain%2Dlightblue%2Dcolor%29%3Bmargin%2Dright%3A%2010px%3Bmargin%2Dtop%3A%20%2D10px%3B%7D%2Esidenav%20%23sidenav%5Fheader%20%7Bmargin%2Dtop%3A%2010px%3Bborder%3A%201px%3Bcolor%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bborder%2Dcolor%3A%20var%28%2D%2Dmain%2Dlightblue%2Dcolor%29%3B%7D%2Esidenav%20%23sidenav%5Fheader%20img%20%7Bfloat%3A%20left%3B%7D%2Esidenav%20%23sidenav%5Fheader%20a%20%7Bmargin%2Dleft%3A%200px%3Bmargin%2Dright%3A%200px%3Bpadding%2Dleft%3A%200px%3B%7D%2Esidenav%20%23sidenav%5Fheader%20a%3Ahover%20%7Bbackground%2Dsize%3A%20auto%3Bcolor%3A%20%23FFD200%3B%20%7D%2Esidenav%20%23sidenav%5Fheader%20a%3Aactive%20%7B%20%20%7D%2Esidenav%20%3E%20ul%20%7Bbackground%2Dcolor%3A%20rgba%2857%2C%20169%2C%20220%2C%200%2E05%29%3B%20color%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bborder%2Dradius%3A%2010px%3Bpadding%2Dbottom%3A%2010px%3Bpadding%2Dtop%3A%2010px%3Bpadding%2Dright%3A%2010px%3Bmargin%2Dright%3A%2010px%3B%7D%2Esidenav%20a%20%7Bpadding%3A%202px%202px%3Btext%2Ddecoration%3A%20none%3Bfont%2Dsize%3A%20var%28%2D%2Dsidenav%2Dfont%2Dsize%29%3Bdisplay%3Atable%3B%7D%2Esidenav%20%3E%20ul%20%3E%20li%2C%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20ul%20%3E%20li%20%7B%20padding%2Dright%3A%205px%3Bpadding%2Dleft%3A%205px%3B%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20a%20%7B%20color%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bfont%2Dweight%3A%20lighter%3B%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20ul%20%3E%20li%20%3E%20a%20%7B%20color%3A%20var%28%2D%2Dmain%2Ddarkblue%2Dcolor%29%3Bfont%2Dsize%3A%2080%25%3Bpadding%2Dleft%3A%2010px%3Btext%2Dalign%2Dlast%3A%20left%3B%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20ul%20%3E%20li%20%3E%20ul%20%3E%20li%20%3E%20a%20%7B%20display%3A%20None%3B%7D%2Esidenav%20li%20%7Blist%2Dstyle%2Dtype%3A%20none%3B%7D%2Esidenav%20ul%20%7Bpadding%2Dleft%3A%200px%3B%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20a%3Ahover%2C%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20ul%20%3E%20li%20%3E%20a%3Ahover%20%7Bbackground%2Dcolor%3A%20var%28%2D%2Dsecondary%2Dgrey%2Dcolor%2D12%29%3Bbackground%2Dclip%3A%20border%2Dbox%3Bmargin%2Dleft%3A%20%2D10px%3Bpadding%2Dleft%3A%2010px%3B%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20a%3Ahover%20%7Bpadding%2Dright%3A%2015px%3Bwidth%3A%20230px%3B%09%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20ul%20%3E%20li%20%3E%20a%3Ahover%20%7Bpadding%2Dright%3A%2010px%3Bwidth%3A%20230px%3B%09%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20a%3Aactive%20%7B%20color%3A%20%23FFD200%3B%20%7D%2Esidenav%20%3E%20ul%20%3E%20li%20%3E%20ul%20%3E%20li%20%3E%20a%3Aactive%20%7B%20color%3A%20%23FFD200%3B%20%7D%2Esidenav%20code%20%7B%7D%2Esidenav%20%7Bwidth%3A%20280px%3B%7D%23sidenav%20%7Bmargin%2Dleft%3A%20300px%3Bdisplay%3Ablock%3B%7D%2Emarkdown%2Dbody%20%2Eprint%2Dcontents%20%7Bvisibility%3Ahidden%3B%7D%2Emarkdown%2Dbody%20%2Eprint%2Dtoc%2Dtitle%20%7Bvisibility%3Ahidden%3B%7D%2Emarkdown%2Dbody%20%7Bmax%2Dwidth%3A%20980px%3Bmin%2Dwidth%3A%20200px%3Bpadding%3A%2040px%3Bborder%2Dstyle%3A%20solid%3Bborder%2Dstyle%3A%20outset%3Bborder%2Dcolor%3A%20rgba%28104%2C%20167%2C%20238%2C%200%2E089%29%3Bborder%2Dradius%3A%205px%3B%7D%40media%20screen%20and%20%28max%2Dheight%3A%20450px%29%20%7B%2Esidenav%20%7Bpadding%2Dtop%3A%2015px%3B%7D%2Esidenav%20a%20%7Bfont%2Dsize%3A%2018px%3B%7D%23sidenav%20%7Bmargin%2Dleft%3A%2010px%3B%20%7D%2Esidenav%20%7Bvisibility%3Ahidden%3B%7D%2Emarkdown%2Dbody%20%7Bmargin%3A%2010px%3Bpadding%3A%2040px%3Bwidth%3A%20auto%3Bborder%3A%200px%3B%7D%7D%40media%20screen%20and%20%28max%2Dwidth%3A%201024px%29%20%7B%2Esidenav%20%7Bvisibility%3Ahidden%3B%7D%2Emarkdown%2Dbody%20%7Bmargin%3A%2010px%3Bpadding%3A%2040px%3Bwidth%3A%20auto%3Bborder%3A%200px%3B%7D%23sidenav%20%7Bmargin%2Dleft%3A%2010px%3B%7D%7D%40media%20print%20%7B%2Esidenav%20%7Bvisibility%3Ahidden%3B%7D%23sidenav%20%7Bmargin%2Dleft%3A%2010px%3B%7D%2Emarkdown%2Dbody%20%7Bmargin%3A%2010px%3Bpadding%3A%2010px%3Bwidth%3Aauto%3Bborder%3A%200px%3B%7D%40page%20%7Bsize%3A%20A4%3B%20%20margin%3A2cm%3Bpadding%3A2cm%3Bmargin%2Dtop%3A%201cm%3Bpadding%2Dbottom%3A%201cm%3B%7D%2A%20%7Bxbox%2Dsizing%3A%20border%2Dbox%3Bfont%2Dsize%3A90%25%3B%7Da%20%7Bfont%2Dsize%3A%20100%25%3Bcolor%3A%20yellow%3B%7D%2Emarkdown%2Dbody%20article%20%7Bxbox%2Dsizing%3A%20border%2Dbox%3Bfont%2Dsize%3A100%25%3B%7D%2Emarkdown%2Dbody%20p%20%7Bwindows%3A%202%3Borphans%3A%202%3B%7D%2Epagebreakerafter%20%7Bpage%2Dbreak%2Dafter%3A%20always%3Bpadding%2Dtop%3A10mm%3B%7D%2Epagebreakbefore%20%7Bpage%2Dbreak%2Dbefore%3A%20always%3B%7Dh1%2C%20h2%2C%20h3%2C%20h4%20%7Bpage%2Dbreak%2Dafter%3A%20avoid%3B%7Ddiv%2C%20code%2C%20blockquote%2C%20li%2C%20span%2C%20table%2C%20figure%20%7Bpage%2Dbreak%2Dinside%3A%20avoid%3B%7D%7D">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+
+
+
+
+
+<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT8AAADSCAYAAAFLDPfVAAAACXBIWXMAAAsSAAALEgHS3X78AAAQzklEQVR4nO3d3VHcyBbA8d6VAzAZ4FICEME1z3qxM4AI1o7AJgKzETCOAF70bG4EkIDKZAAJqPaWdpu940Ef/XX6Q/r/qm7dKi/MCE3PUXef7tMKQOF+c7n8qm6ulVLnIf/0vmtHr+WN7QtVdfNXkCsyZHUHRy7urO/aO8kLtL6DL6Y+ktB+N329qm5+xr44ZXkHjw//QV/0q38f8/JHHTaTpT/W+A5OvOk7m4tzYXSBc99cmzev6uat7TU63UGbj+ngvz2Z/p7xBU7dPdu25MqrDdpcpOsfNHuBVd0sfkNDtc8ps2Gm79pH1+f1Pv3s3rcz/d2g7Wb/bu7fPZ/26tUGpy5uxmnMpxAAAPDnOvURfHYhyNRHVTfDmMJ64GPgeepHbGcWfrm4GF0nmyHjaGdUmkuH9XOsi1Omd7CqmxOl1L1a6MpP8en+m97B+4l/Nx78qH8u7sfBP10u/Y7pHZz8q/fv7hjfwZPTzMLBF+ZB8kvjPKozvBs7y5+3u8CqbiY/urE3PdR37YXJRThfoFLqZOkFTL7JPgP3pakP57YVql0Gm1kwZXvhQS6wqpuvBx/j0d5/S/KIBAAAALZOvPNd1c03pdSnUu6z7YBE7AbqdQQ/DX40Gy6jOedFZQZGb97ahpwif8zYNM1ax+rB/6gt3TwV+itskxcbZpmUUl8Cvv3oIlqDmVWvDzdYy1i40Lu+a88mfm9Yg324nsvWc9+1RyOvLXrzVKgbaNqaFpYUvj1clGlq7HVj3DwV8AZapbSXLt7m9SZu3lImO9ia+RDLKZ3XAyy0yMV0/sTNWwoJj6YLvk143cCAiymO+q59tU7BZcFurK/uC5/kplO8CmQ0Jxn75qkYY2FXtq0vxc1Tud7AkDePbCUAAAAAAAAAYB2iTXfHLrbmyjYFILm87W+l3DjNapeskm6Bhd08pwSU2IbD0m6eK5GvcFU37xd+5Lbv2o8S7x2bVAw83EH/YnQJR8nEHyIv1prgDh4DJ2Kf9/76XEXZtd53rXX3oBRBb6DeVLMpoWPg2I6k0ZWgobs5qdYLRi88EZPBh3TqezkxaoKO9gkDP5WdYuxQmsf3jZO2wFA3cayKjl4rPecxxHuHKs0yu6lw7r8L9g9n956EWmgeqgUuVXg+nmsROVQhcuV9A03KY2vXIxWm/xXyRsRcLx2iBdrsCT6fqxqm/zCbsXLyCYkUD5GTuS0SY3veZn729vDf5lq5FnRUFLS8voW3AVbWT7XU2adviLp3+5J2Yzy3iY3tzpSo9DrLZ6dSkEISMzfRJb7N7p6SeGL7tEDRiYOx+LbHOE5Ky2EsPBrL9B7kURMbE5f27ok8sXM+CmpqA/dUy1zaGjvXop0VNxszlowySGItVjV2leUNdHg6TyWx/tZ37WQ48JXdDVzoZNuGjWfpUBMtK2fCpV848TtBt/UDAAAAAAAAAAAAAAAAAAAAwJqtpgSTydlzsCe9s6HoBkijkxWjBEVWW2tMVXXzY6qED4LxruNkorgGuJVirIldhqiDZaKoR7Bj4xtqYp2urVbrWhQTAfVj19ToGfXITxENUNd5M+rzcXpwWbL/sHTtJqPD22l85SmhRgyNb8WyfgRLjXgLGElfmtYF0t2TpfqScz73XXvlfcWOso0alpPMd33Xnhm+bvbTOKbRXFcHsxmcHUo+WMu1ytiNZYbDeFJaf7hR5rhcWHYlfBqfVWVfKdlFQI9HivW5TLo08lJt/WhsGp9vJM+lz5xVBNQjXtf+jNFgZd9QOlp/EDkc7WRclS9AN4JavROsG9G+4YMxOC3kleFoLN0QU5VmHAYCRqeYLB0wYuAip6xQNo9ggcHBhc+ZaxEHKw991xol/vXRaD5l4o0Ha7Fk0QCFl1XtfE5pkG6IFiPeE6XU5HkrId8rpuQXFHEgYBxpxkh8SbY46DiU9KKquvmglLqJ/LbOc18B5t3+ReP7R+pBSOzGp14ObHL5UPuuvQs0UIk54s265n2yBphDRuKlIdocVqVHq6NH+hq6tBjxevX5bEbXqSQJzbmmwywGBMYrdA4Yn8KhD0XzOdfLq88bS/QIaHC2VglOXK7RovEd+x4qV0LjUylWw6xkpbJ139VyIOA12VzS0rRVn+AvQY+EraZjGPFOowFacJyGMc48bK3xqVL3Bafg2Diu9NTNIstNV78oeTU4y9gXeEQlmxGvyxK0M9PGnTMa4ASDs4gnuTSMmfd7YE8zAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADRraqGs66DPBTjPs7gclZBskL+Ko5QqOrmq1LqSwaXsjaXkn9P8ZEv1wMJ10D6XJBiI1+IY+UxS/zo1SKPzqLhRSF++mWp57bR8ITFOKimuMZHHy+KixhvUtSAw/HESFiKdQBhaQMOn4Y3PEb+VErt+q4V70xjWTGNr6obqwOa91z0XbsTuSh4KSny2Q4ybvuu/Sh0LQigpMZnkzJbxfm1a1dE46vq5pvFj5/2XfsgeDkIpJSplk+GP3dLwytH9lMtNtmMWFMECKOEyGc60GBwUZhS02uv9F17m9klYUHWja+qmxvDH6WfV6DcI98Hw58TXfQIGdlOtVR1c276szaP3KpuhmX2xq+dgs3AyXehRcpBWs6R71rodbNueDaLOKu6MZ2C8n4vCVk2Po887tLrnki8bmBnFi9nM/k+RnzB6JxcI5/IYtESJqBNV9xUdeO9Qy/GgtE5uTY+ya2PR4Kv7ctmEafvusYoC0bnZNf49DZI298x7vsM3/ZcMyGWS7+8vqA5LDPLMfK57L+17vtk2ACNV+FYLrQYk8WEfFaNL0Q/xkZODbDvWpuBhtcoN5d1jrlFPueBhkU25Be6ASbteNvQ+1hWIbfG5zPFYpoNeaXv2qPEDdAm6vkONJJOr+zLpvHpzIPvazjP9usGmGQqJuaq65ymm3KKfEEyD54N8DRBAzQedbp2LfZcef5+UFl0uHUeN2g6zWcwETP/u5U87phcIl/wPK5nBLyIFCWM+5k2Cy0mZLdXOXnjk8rjKv8G+DlCFsCm8+/7Bc1moPEieRiu6maYXpFO+B+55jElS3SYPgb1F/QpxnvFlMNjN8ZKkyfXCKtHohJRw2YBrO9Ci+R53DFJG59LHtfDk+uSKj09EbQP2Hetzd9efB53TOrIF7uO8n1VN06T0boPGIrxdE6AL2i2lRuSNb7Yedw9Nx4jx1DLsWwyGl5fUMuccVQpI1/K6qLXLitDQi2+NH2dhF/QKFI2PrEpFkOfHFN6vp13m9/3/YJmG/VUqqmWzHaQPei0mjHP+cPNZjQOpYp8Oe0gO9FzjTHYbvH0kX1BzOiNz3W0Kewkxjo5y0WcXl9QnSLMWorI57syQ4r0tI9NHtf3C1rE4tjVFAoK4Lvw69t0/n2/oNnlccdEbXySiwg8XUpnAWIu4iyl2n7UWi16fmuLBRyNU3NV3fguYgiZiRFFJU9LenLaavcY0yvj6PPZs922GLPwT1HnjdD4LDimu2w6/16bwUuYXtlH47Pz0/YXIuZxixjh7qPxGYqQB/YZaOxKPAKCAYcB18OlIw00dqU9bl8Ue8x9LB6nmtsU/nHN4xZ9zBeRb4ZeReyUdhOOetYrcXJE5BsRYLeYVIbhKvBy/qRofONOPBZiPjqktybfi9MzAQAAAAAAAAAAgM0DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABJ/cbtL0NVN8dKqfdKqeH//6Mv+v3W7wuSuuy79mupHwHBLzNV3bxVSp0rpf7QgQ7I1WPfte9K/XTeZHANm1fVzdCDuybYoTBnJX9gBL9EdA/vh1LqZJM3AKU767v2seS/geAXWVU3Jzrovd3UH441uei79q70v4fgF4nu6d0ztEXhdn3X7tbwIf6ewTWsXlU3Q0bsicCHwt31XXuxlg+RbK+wqm5+sCQFK/Dcd+3Rmj5Ihr2CMg18D0NDzuA6UI6hvaymx/eC4CekqpvryIFvaKC3Sqnva5iMBqQR/AToOb5z4bd51ivsr5L8kUDhmPMLrKqbD0qpG8G3+EzAA/wR/ALS+29/Crz0s15U+pDsjwNWhmFvWPcCr3mxlnVVQE4IfoFUdXMfeNfG0Nt713ctmVlAAMEvAJ3ZDblHd1hMWvSmcSB3zPl5qurmk1LqW8CXLLpMEFAKtrd50JndkIFPlV4mCCgFwc+RzuyGXtJyVXqZIKAUzPm5k8js/il1sbqX+oX6gU4eJevXJfxshr/ndKtJNYKfA71nN3Q9vgeJL5fAnOQWHevAFPTz0WXOfias7Xis/7fJ9aMMey0J7tkN/vTVQ3MCn79hG+GtwOuGXh5l62LLC+cJfhZ0L0p6z24wuifJOkE/O4kTyvRDNGV9x9UUJXVF8DOkDxmS7EVJVYB5t9VhTQCPEsU7IxW+mLOqoqSuWOdnQHDP7qEzqXJUHJhkTWSHTVU35/qkvlRWV5TUFT0/MxKZ3TF/SL3w8CXuu3bI7A0PPPYKLwueBdUP0ZSBb3Ca+P2zQfBbIJTZnfJB9wxEDUMeHQQvI/1dpbkInXnfO8AqpY+sI/0/gt+MBNWYB9f6eEtxw0S+DoKbn//ZcymUCEh9XOlnoYx1sZjzm5DB3IzY/N8UzhRWt33Xfgz9ovohmjLBsSPB8RrBb4TO7P7I4FKG7W6fY7/pRoOgSEGJDBaZD4vnmecbQfA7EDGza+NjiiHLxjLERwIJDukjDZaQ2Z3BnN9rOfT4Dt1UdfNXjGTIvpcM8RAY9MlwayWV2U0Z+BSZ3Xn0/PYUdMB4skOMMpi/Ck3kmICqbp4STxskGS2UhOCnVXUzzMt8yuJizCWbyM4gIRSCyJxqBg/RS4kteWtD8FvHF/lOP+mj7+Mt+N6R2d24zQe/jDK7ITzoJTIpgmBJGeK1ZnY5AsHCpoOfzmY+ZXApoSU757eQnqBEZjf1Q5TT/ixtPfj9TFxWSFrKIHif6RKZ4IvHM1ke9Y6ta3Y2u9RFT0qvOfApPQS9T7RM5jTDAgoXQrtmUk+bBN+LvAWbDH46s1vCkpaQrmMHQT3xnmRJzgiR4p0ZPESl9iKv3uaGvStZohFCtKxgVTfDYt8PMd5rgsgh8BksjxLJWG/FpoKfzkimLiuUm51eNC02UZ44sSSV2U39ECWz62kzw95M6qnlaPgSPw0JCn2PgtOBNVXtQIke3/vU1ZjZuuZvS3N+BL55JzoISk3eRy3PpQU/a3ev2ENKSdZyrs0mgp+ec1p7ZjeU93qXQlCxaxPqobzEe6Z+iG76uMmQVh/89KR0ysn2EpX+oNhJFH7I4CF6RWY3nFUnPFa2dS0WkeKXET8LMrswsvpsr56j4bjGBdLD0kjLXUSKd5LZXafNFzaAvIhLjIJv8cpkeVTwvcigkjPiiFHROPixjJlkdilWIITgB1GRkgRSxzLeJy7RRbECQQQ/iNFrBqXn+daY2X3UQ10CnyDm/BDc3m4a6eAhlZkeSsB/Cf26hkTOFMFrb7gnCCliZvRZaOvaeaLAR/n5yOj5IYgEZewlMrspipImO4lv6+j5wYs+mPs6cmJAKrMba0nLrR7eksVNiOAHa7qHdJ2oIOylUGZXstc6LCD/zlxeXgh+MJLB6Wx3wuXafXthDzpL+1+9xY7iAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA2DwAAAAAAAAAAAAAAAAAAAAAAAAAAAEAkSqn/AZ6EjMOgKkfQAAAAAElFTkSuQmCC">
+
+</head>
+
+
+
+<body>
+
+		<div class="sidenav">
+		<div id="sidenav_header">
+							<img src="data:image/png;base64,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" title="STM32CubeMX.AI logo" align="left" height="70" />
+										<br />7.0.0-dev<br />
+										<a href="#doc_title"> FAQs </a>
+					</div>
+		<div id="sidenav_header_button">
+			 
+							<ul>
+					<li><p><a id="index" href="index.html">[ Index ]</a></p></li>
+				</ul>
+						<hr class="new1">
+		</div>	
+
+		<ul>
+  <li><a href="#general">General</a>
+  <ul>
+  <li><a href="#ref_python_ver">How to know the version of the deep-learning framework components which are used?</a></li>
+  <li><a href="#how-is-used-the-cmsis-nn-library">How is used the CMSIS-NN library?</a></li>
+  <li><a href="#what-is-the-eabi-used-for-the-network_runtime-libraries">What is the EABI used for the <em>network_runtime</em> libraries?</a></li>
+  <li><a href="#x-cube-ai-python-api-availability">X-CUBE-AI Python API availability?</a></li>
+  <li><a href="#tensorflow-keras-tf.keras-vs-keras.io">TensorFlow Keras (tf.keras) vs Keras.io</a></li>
+  <li><a href="#it-is-possible-to-update-a-model-on-the-firmware-wo-having-to-do-a-full-firmware-update">It is possible to update a model on the firmware w/o having to do a full firmware update?</a></li>
+  <li><a href="#keras-model-or-sequential-layer-support">Keras Model or Sequential layer support?</a></li>
+  <li><a href="#is-it-possible-to-split-the-weights-buffer">Is it possible to split the weights buffer?</a></li>
+  <li><a href="#is-it-possible-to-place-the-activations-buffer-in-different-memory-segments">Is it possible to place the “activations” buffer in different memory segments?</a></li>
+  <li><a href="#how-to-compress-the-non-densefully-connected-layers">How to compress the non-dense/fully-connected layers?</a></li>
+  <li><a href="#is-it-possible-to-apply-a-compression-factor-different-of-x8-x4">Is it possible to apply a compression factor different of x8, x4?</a></li>
+  <li><a href="#how-to-specify-or-to-indicate-a-compression-factor-by-layer">How to specify or to indicate a compression factor by layer?</a></li>
+  <li><a href="#why-a-small-negative-ratio-is-reported-for-the-weights-size-with-a-model-wo-compression">Why a small negative ratio is reported for the weights size with a model w/o compression?</a></li>
+  <li><a href="#is-it-possible-to-dumpcapture-the-intermediate-values-during-the-execution-of-the-inference">Is it possible to dump/capture the intermediate values during the execution of the inference?</a></li>
+  </ul></li>
+  <li><a href="#validation-process">Validation process</a>
+  <ul>
+  <li><a href="#how-to-validate-a-specific-network-when-multiple-networks-are-resident-into-the-same-firmware">How to validate a specific network when multiple networks are resident into the same firmware?</a></li>
+  <li><a href="#stack_heap_size_issue">Reported STM32 results are incoherent</a></li>
+  <li><a href="#unable-to-perform-automatic-validation-on-target">Unable to perform automatic validation on-target</a></li>
+  <li><a href="#long-time-process-or-crash-with-a-large-test-data-set">Long time process or crash with a large test data set</a></li>
+  </ul></li>
+  <li><a href="#quantization-and-post-training-quantization-process">Quantization and post-training quantization process</a>
+  <ul>
+  <li><a href="#backward-compatibility-with-x-cube-ai-4.0-and-x-cube-ai-4.1">Backward compatibility with X-CUBE-AI 4.0 and X-CUBE-AI 4.1</a></li>
+  <li><a href="#is-it-possible-to-use-the-keras-post-training-quantization-process-through-the-ui">Is it possible to use the Keras post-training quantization process through the UI?</a></li>
+  <li><a href="#is-it-possible-to-use-the-keras-post-training-quantization-process-with-a-non-classifier-model">Is it possible to use the Keras post-training quantization process with a non-classifier model?</a></li>
+  <li><a href="#is-it-possible-to-use-the-compression-for-a-quantized-model">Is it possible to use the compression for a quantized model?</a></li>
+  <li><a href="#how-to-apply-the-keras-post-training-quantization-process-on-a-non-keras-model">How to apply the Keras post-training quantization process on a non-Keras model?</a></li>
+  <li><a href="#tensorflow-lite-optimize_for_size-option-support">TensorFlow lite, OPTIMIZE_FOR_SIZE option support</a></li>
+  </ul></li>
+  <li><a href="#references">References</a></li>
+  </ul>
+	</div>
+	<article id="sidenav" class="markdown-body">
+		
+
+
+
+ 
+
+
+	<h1 class="toc-title">Contents</h1>
+	<div class="contents">
+	<ul>
+ <li><a href="#general">General</a>
+ <ul>
+ <li><a href="#ref_python_ver">How to know the version of the deep-learning framework components which are used?</a></li>
+ <li><a href="#how-is-used-the-cmsis-nn-library">How is used the CMSIS-NN library?</a></li>
+ <li><a href="#what-is-the-eabi-used-for-the-network_runtime-libraries">What is the EABI used for the <em>network_runtime</em> libraries?</a></li>
+ <li><a href="#x-cube-ai-python-api-availability">X-CUBE-AI Python API availability?</a></li>
+ <li><a href="#tensorflow-keras-tf.keras-vs-keras.io">TensorFlow Keras (tf.keras) vs Keras.io</a></li>
+ <li><a href="#it-is-possible-to-update-a-model-on-the-firmware-wo-having-to-do-a-full-firmware-update">It is possible to update a model on the firmware w/o having to do a full firmware update?</a></li>
+ <li><a href="#keras-model-or-sequential-layer-support">Keras Model or Sequential layer support?</a></li>
+ <li><a href="#is-it-possible-to-split-the-weights-buffer">Is it possible to split the weights buffer?</a></li>
+ <li><a href="#is-it-possible-to-place-the-activations-buffer-in-different-memory-segments">Is it possible to place the “activations” buffer in different memory segments?</a></li>
+ <li><a href="#how-to-compress-the-non-densefully-connected-layers">How to compress the non-dense/fully-connected layers?</a></li>
+ <li><a href="#is-it-possible-to-apply-a-compression-factor-different-of-x8-x4">Is it possible to apply a compression factor different of x8, x4?</a></li>
+ <li><a href="#how-to-specify-or-to-indicate-a-compression-factor-by-layer">How to specify or to indicate a compression factor by layer?</a></li>
+ <li><a href="#why-a-small-negative-ratio-is-reported-for-the-weights-size-with-a-model-wo-compression">Why a small negative ratio is reported for the weights size with a model w/o compression?</a></li>
+ <li><a href="#is-it-possible-to-dumpcapture-the-intermediate-values-during-the-execution-of-the-inference">Is it possible to dump/capture the intermediate values during the execution of the inference?</a></li>
+ </ul></li>
+ <li><a href="#validation-process">Validation process</a>
+ <ul>
+ <li><a href="#how-to-validate-a-specific-network-when-multiple-networks-are-resident-into-the-same-firmware">How to validate a specific network when multiple networks are resident into the same firmware?</a></li>
+ <li><a href="#stack_heap_size_issue">Reported STM32 results are incoherent</a></li>
+ <li><a href="#unable-to-perform-automatic-validation-on-target">Unable to perform automatic validation on-target</a></li>
+ <li><a href="#long-time-process-or-crash-with-a-large-test-data-set">Long time process or crash with a large test data set</a></li>
+ </ul></li>
+ <li><a href="#quantization-and-post-training-quantization-process">Quantization and post-training quantization process</a>
+ <ul>
+ <li><a href="#backward-compatibility-with-x-cube-ai-4.0-and-x-cube-ai-4.1">Backward compatibility with X-CUBE-AI 4.0 and X-CUBE-AI 4.1</a></li>
+ <li><a href="#is-it-possible-to-use-the-keras-post-training-quantization-process-through-the-ui">Is it possible to use the Keras post-training quantization process through the UI?</a></li>
+ <li><a href="#is-it-possible-to-use-the-keras-post-training-quantization-process-with-a-non-classifier-model">Is it possible to use the Keras post-training quantization process with a non-classifier model?</a></li>
+ <li><a href="#is-it-possible-to-use-the-compression-for-a-quantized-model">Is it possible to use the compression for a quantized model?</a></li>
+ <li><a href="#how-to-apply-the-keras-post-training-quantization-process-on-a-non-keras-model">How to apply the Keras post-training quantization process on a non-Keras model?</a></li>
+ <li><a href="#tensorflow-lite-optimize_for_size-option-support">TensorFlow lite, OPTIMIZE_FOR_SIZE option support</a></li>
+ </ul></li>
+ <li><a href="#references">References</a></li>
+ </ul>
+	</div>
+
+
+
+
+<section id="general" class="level1">
+<h1>General</h1>
+<section id="ref_python_ver" class="level2">
+<h2>How to know the version of the deep-learning framework components which are used?</h2>
+<p>X-CUBE-AI Expansion Package is a complete self-contained application package. No external tools is requested to use the package. To know the version of the main components which are embedded, the following command can be used:</p>
+<pre class="dosbatch"><code>&gt;  stm32ai --tools_version
+Neural Network Tools for STM32AI v1.5.1 (STM.ai v7.0.0)
+- Python version   : 3.7.9
+- Numpy version    : 1.19.5
+- TF version       : 2.5.0
+- TF Keras version : 2.5.0
+- ONNX version     : 1.6.0
+- ONNX RT version  : 1.7.0
+</code></pre>
+<div class="Warning">
+<p><strong>Note</strong> — User should be aware that the respective Python DL modules are used to run the original model and also to import/parse the model. To know the supported layers/operators, please refer to the description in the <a href="supported_ops_tflite.html">[TFLITE]</a>, <a href="supported_ops_keras.html">[KERAS]</a> and <a href="supported_ops_onnx.html">[ONNX]</a>.</p>
+</div>
+</section>
+<section id="how-is-used-the-cmsis-nn-library" class="level2">
+<h2>How is used the CMSIS-NN library?</h2>
+<p>The network runtime library is partially based on the CMSIS library. CMSIS is a vendor-independent hardware abstraction layer for micro-controllers that are based on Arm® Cortex® processors (<a href="https://arm-software.github.io/CMSIS_5/General/html/index.html">https://arm-software.github.io/CMSIS_5/General/html/index.html</a>). The CMSIS-NN sub-component and a minor part of the CMSIS-DSP sub-component are embedded in the <em>network_runtime.a</em> library to be sure that the requested files are compiled with the optimal options.</p>
+<table>
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">component</th>
+<th style="text-align: left;">version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CMSIS package</td>
+<td style="text-align: left;">r5.7.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CMSIS-Core(M)</td>
+<td style="text-align: left;">V5.4.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CMSIS-DSP</td>
+<td style="text-align: left;">V1.8.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CMSIS-NN</td>
+<td style="text-align: left;">V1.3.0</td>
+</tr>
+</tbody>
+</table>
+<p>A part of the forward kernel functions are <em>directly</em> mapped on the CMSIS-NN (legacy support of the Qmn format) when available but the major part, are the optimized implementations (integer and float format) only based on the CMSIS-type definitions for portability across the STM32 families.</p>
+<figure>
+<img src="data:image/png;base64,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" property="center" style="width:30.0%" />
+</figure>
+</section>
+<section id="what-is-the-eabi-used-for-the-network_runtime-libraries" class="level2">
+<h2>What is the EABI used for the <em>network_runtime</em> libraries?</h2>
+<p>For performance motivations, the provided libraries (<code>network_runtime.a</code>) are compiled with the <em>hard</em> floating-point ABI option allowing generation of floating-point instructions and using FPU-specific calling conventions. This implies that the final end-user project should be also compiled and linked with this option.</p>
+<div class="Warning">
+<p><strong>Note</strong> — Abnormal situation is normally detected at link time, but there is a specific case where the firmware is generated w/o errors but at run-time the results are <em>UNPREDICTABLE</em>. For example for a GCC-base environment, <code>-mfloat-abi=soft or softfp</code> can be set by default for the whole project to use an other EABI-soft-base binary library. There is currently no link issue because the library has been generated with another EABI compliant tool-chain (IAR for ARM tool-chain).</p>
+</div>
+<blockquote>
+<p>If specific binary library version is requested see with your local ST support.</p>
+</blockquote>
+</section>
+<section id="x-cube-ai-python-api-availability" class="level2">
+<h2>X-CUBE-AI Python API availability?</h2>
+<p>X-CUBE-AI is only available through an UI interface (fully integrated in STM32CubeMX) and through a command line interface.</p>
+</section>
+<section id="tensorflow-keras-tf.keras-vs-keras.io" class="level2">
+<h2>TensorFlow Keras (tf.keras) vs Keras.io</h2>
+<p>X-CUBE-AI 6.0 pack embeds only TensorFlow 2.3.1. The Keras.io module is no more used. <code>&#39;tf.keras 2.4.0&#39;</code> is now used to import and to validate the Keras models. The previous <code>&#39;TF_KERAS=False&#39;</code> environment variable can be no more used to use a Kerias.io back-end. This implies that the Keras model with a NCHW tensor format (channel-first) can be no more validated. Code can be always generated but the validation flow to test the outputs against the outputs of the generated c-model can be no more used. Following type of error message will be generated during the execution of the provided model.</p>
+<pre class="dosbatch"><code>...
+INTERNAL ERROR: The Conv2D op currently only supports the NHWC tensor format
+                on the CPU. The op was given the format: NCHW [Op:Conv2D]
+...</code></pre>
+<p>If the user wants to validate the generate c-model, he must provide a test data set. The <code>&#39;--no-exec-model&#39;</code> option can be used to avoid to execute the imported model.</p>
+<pre class="dosbatch"><code>&gt; stm32ai validate -m &lt;keras_model_with_NCHW&gt;.h5 -vi test.npz --no-exec-model
+...
+
+Evaluation report (summary)
+------------------------------------------------------------------------------------------------------
+Mode              acc      rmse      mae       l2r       tensor
+------------------------------------------------------------------------------------------------------
+x86 C-model #1    100.00%  0.000000  0.000000  0.000000  activation_6 [ai_float, (1, 1, 2), m_id=20]
+</code></pre>
+</section>
+<section id="it-is-possible-to-update-a-model-on-the-firmware-wo-having-to-do-a-full-firmware-update" class="level2">
+<h2>It is possible to update a model on the firmware w/o having to do a full firmware update?</h2>
+<p><strong>Yes</strong> - The <code>&#39;--binary&#39;</code> and <code>&#39;--relocatable&#39;</code> options of the <code>&#39;generate&#39;</code> command allow to implement a simple or complete mechanism to be able to upgrade a whole generated c-model w/o having to do a full firmware update (refer to <a href="command_line_interface.html">[CLI]</a> or <a href="relocatable.html">[RELOC]</a>, <em>&quot;Relocatable binary model support</em>&quot; article).</p>
+</section>
+<section id="keras-model-or-sequential-layer-support" class="level2">
+<h2>Keras Model or Sequential layer support?</h2>
+<p>Nested topologies are not supported. This can appear when the Keras functional API is used to build the network and a <code>&#39;Model&#39;</code> object is called as a layer.</p>
+<p>A possible work-around is to convert the Keras model to a TensorFlow lite model, if all operators are supported.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>converter <span class="op">=</span> tf.lite.TFLiteConverter.from_keras_model_file(<span class="op">&lt;</span>keras_model_path<span class="op">&gt;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> converter.convert()</span></code></pre></div>
+</section>
+<section id="is-it-possible-to-split-the-weights-buffer" class="level2">
+<h2>Is it possible to split the weights buffer?</h2>
+<p><strong>Yes,</strong> by weights/bias tensors, see the <code>&#39;--split-weights&#39;</code> option (refer to <a href="command_line_interface.html">[CLI]</a>).</p>
+</section>
+<section id="is-it-possible-to-place-the-activations-buffer-in-different-memory-segments" class="level2">
+<h2>Is it possible to place the “activations” buffer in different memory segments?</h2>
+<p><strong>No,</strong> only a continuous memory-mapped buffer should be provided by the AI application (refer to <a href="embedded_client_api.html#sec_data_placement">[API]</a>).</p>
+</section>
+<section id="how-to-compress-the-non-densefully-connected-layers" class="level2">
+<h2>How to compress the non-dense/fully-connected layers?</h2>
+<p>Only the 32b floating-point dense/fully-connected layer can be compressed.</p>
+</section>
+<section id="is-it-possible-to-apply-a-compression-factor-different-of-x8-x4" class="level2">
+<h2>Is it possible to apply a compression factor different of x8, x4?</h2>
+<p><strong>No.</strong> The underlying weight-sharing algorithm (K-means clustering) is based on a dictionary with 16 (x8) or 256 (x4) entries. At the end, the global gain depends of the parameter number versus dictionary size. Note that for a given layer, bias parameters are not necessarily compressed. Compression is applied by tensor.</p>
+</section>
+<section id="how-to-specify-or-to-indicate-a-compression-factor-by-layer" class="level2">
+<h2>How to specify or to indicate a compression factor by layer?</h2>
+<p>By default, the compression process tries to apply globally the same compression factor (<em>x4</em> or <em>x8</em>) for all dense-layers or fully-connected-layers. If the global accuracy is too much impacted, the user has the possibility to refine the expected compression factor layer-by-layer.</p>
+<p>A JSON file must be defined, to indicate what is the compression factor (<em>8</em> or <em>4</em>) which must be applied for a given layer. The layer is specified by its original name.</p>
+<p>Example of configuration file:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;layers&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;dense_1&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;factor&quot;</span><span class="fu">:</span> <span class="dv">8</span><span class="fu">},</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;dense_2&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;factor&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">},</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;dense_3&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;factor&quot;</span><span class="fu">:</span> <span class="dv">8</span><span class="fu">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The option <code>-c/--compress</code> can be used to pass the configuration file.</p>
+<pre class="dosbatch"><code>$ stm32ai analyze -m &lt;model_file&gt; -c &lt;conf_file&gt;.json</code></pre>
+</section>
+<section id="why-a-small-negative-ratio-is-reported-for-the-weights-size-with-a-model-wo-compression" class="level2">
+<h2>Why a small negative ratio is reported for the weights size with a model w/o compression?</h2>
+<p>X-CUBE-AI optimizer implements different merging engine, allowing for example to fold a batch-normalization layer in the previous layer. In this case the reported value take account of these optimizations, the parameters of the batch-normalization layer are removed in the generated C-model.</p>
+<pre class="dosbatch"><code>$ stm32ai analyze -m ds_cnn.h5
+...
+weights (ro)       : 159,536 (155.80 KiB) (-0.64%)
+...</code></pre>
+</section>
+<section id="is-it-possible-to-dumpcapture-the-intermediate-values-during-the-execution-of-the-inference" class="level2">
+<h2>Is it possible to dump/capture the intermediate values during the execution of the inference?</h2>
+<p>Yes, thanks the usage of the Platform Observer API (refer to <a href="embedded_client_api.html#ref_observer_api">[API]</a>, <em>“Platform Observer API”</em> section)</p>
+</section>
+</section>
+<section id="validation-process" class="level1">
+<h1>Validation process</h1>
+<section id="how-to-validate-a-specific-network-when-multiple-networks-are-resident-into-the-same-firmware" class="level2">
+<h2>How to validate a specific network when multiple networks are resident into the same firmware?</h2>
+<p>Inside a firmware which is generated with multiple networks, by construction, each generated c-model has its own name. The “validate” command should be used with the argument <code>&#39;--name/-n &lt;c-name&gt;&#39;</code> to indicate the c-model which will be used, else the default name <em>“network”</em> is used.</p>
+<pre class="dosbatch"><code>$ stm32ai validate -m original_model_path --mode stm32 -n net1_name </code></pre>
+<p>After the connection phase, the list of the networks which are in the firmware are reported.</p>
+<pre class="dosbatch"><code>...
+&lt;Stm32com id=0x28074647320 - CONNECTED(COM35/115200) devid=0x450/STM32H743/753 and STM32H750 msg=2.1&gt;
+ 0x450/STM32H743/753 and STM32H750 @480MHz/240MHz (FPU is present) lat=4 Core:I$/D$
+ found network(s): [&#39;net1_name&#39;, &#39;net2_name&#39;,...]
+... </code></pre>
+<p>Note that after this step, there is a basic <em>checking</em> process to ensure that the selected c-model is compliant with the original model. This <em>“signature”</em> is based on a set of values: TOOLS versions, MACC, RAM and ROM size. Don’t forget to pass also the arguments (compression factor, allocate-inputs…) which were used to generate the c-model else the “signature” will be invalid.</p>
+</section>
+<section id="stack_heap_size_issue" class="level2">
+<h2>Reported STM32 results are incoherent</h2>
+<p>Compared to the metrics reported by a validation on desktop, sometimes the STM32 results (validation on target, automatic or not) are different or incoherent. Unfortunately, this can appears because the defined stack or heap sizes are not enough for the generated project.</p>
+<p>The work-around is to generate or to modify an <code>aiValidation</code> project, to increase manually the defined stack and/or heap sizes before to re-compile and to flash the STM32 firmware.</p>
+<p>GCC-base IDE project</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Linker file : STM32XXX.ld */</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>_Min_Heap_Size <span class="op">=</span> <span class="bn">0x2000</span> <span class="op">;</span>   <span class="co">/* required amount of heap  */</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>_Min_Stack_Size <span class="op">=</span> <span class="bn">0x800</span> <span class="op">;</span>   <span class="co">/* required amount of stack */</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span></code></pre></div>
+<p>IAR Embedded Workbench IDE project</p>
+<div id="fig:id_nn_lib_integration" class="fignos">
+<figure>
+<img src="data:image/png;base64,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" property="center" style="width:40.0%" alt="Figure 1: Stack or head size definition (IAR)" /><figcaption aria-hidden="true"><span>Figure 1:</span> Stack or head size definition (IAR)</figcaption>
+</figure>
+</div>
+</section>
+<section id="unable-to-perform-automatic-validation-on-target" class="level2">
+<h2>Unable to perform automatic validation on-target</h2>
+<p>Different reasons can interrupt the process of validation.</p>
+<section id="during-the-compilation-phase-of-the-temporary-project" class="level3 unnumbered">
+<h3 class="unnumbered">1 - During the compilation phase of the temporary project</h3>
+<p>The following typical link issue can appear (IAR Embedded Workbench IDE):</p>
+<pre class="batch"><code>Error[Lp011]: section placement failed
+            unable to allocate space for sections/blocks with a  
+total estimated minimum size of 0x3&#39;d724 bytes (max align  
+0x8) in &lt;[0x2000&#39;0000-0x2001&#39;ffff]&gt; (total uncommitted space  
+0x2&#39;0000).</code></pre>
+<p>This indicates generally that the input/output tensors and/or activation buffer can be not placed simultaneously in the default or same RW section. A possible work-around is to place the activation buffer in the external memory device (refer to <a href="https://www.st.com/resource/en/user_manual/dm00570145.pdf">[2]</a>).</p>
+<p>Another work-around is to place manually the different buffers in different RAM memory regions.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* file: Middlewares/ST/Application/Validation/Src/aiValidation.c */</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">/* file: Middlewares/ST/Application/SystemPerformance/Src/aiSystemPerformance.c */</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>AI_ALIGNED<span class="op">(</span><span class="dv">4</span><span class="op">)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> ai_u8 activations<span class="op">[</span>AI_NETWORK_DATA_ACTIVATIONS_SIZE<span class="op">];</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>AI_ALIGNED<span class="op">(</span><span class="dv">4</span><span class="op">)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> ai_u8 in_data<span class="op">[</span>AI_NETWORK_IN_1_SIZE_BYTES<span class="op">];</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>AI_ALIGNED<span class="op">(</span><span class="dv">4</span><span class="op">)</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> ai_u8 out_data<span class="op">[</span>AI_NETWORK_OUT_1_SIZE_BYTES<span class="op">];</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span></code></pre></div>
+</section>
+<section id="during-the-set-up-of-the-communication-with-the-board" class="level3 unnumbered">
+<h3 class="unnumbered">2 - During the set-up of the communication with the board</h3>
+<pre class="dosbatch"><code>...
+ON-DEVICE STM32 execution (&quot;network&quot;, auto-detect, 115200)..
+LOAD ERROR: STM32 - no connected board(s), invalid firmware or the board should be re-started</code></pre>
+<p>This illustrates the case where a device seems not correctly flashed/re-started or that the board is not connected to the workstation. To check it this point, the best way is to use a terminal application (like TeraTerm or Putty) and to check the init log. COM port and baud-rate information should be used to precise the connection through the UI validation interface (refer to <a href="https://www.st.com/resource/en/user_manual/dm00570145.pdf">[2]</a>). This test allows to check that the firmware is correctly flashed.</p>
+<pre class="dosbatch"><code>...
+  params            : 16688 bytes
+  inputs/outputs    : 1/1
+   I[0]  u8, scale=0.101961, zero=0, 1960 bytes, shape=(49,40,1)
+   O[0]  u8, scale=0.003906, zero=0, 4 bytes, shape=(1,1,4)
+Initializing the network
+ Activation buffer  : 0x24002108 (4352 bytes) internal
+
+-------------------------------------------
+| READY to receive a CMD from the HOST... |
+-------------------------------------------
+
+# Note: At this point, default ASCII-base terminal should be closed
+# and a stm32com-base interface should be used
+# (i.e. Python stm32com module). Protocol version = 2.1</code></pre>
+</section>
+<section id="during-the-communication-with-the-board" class="level3 unnumbered">
+<h3 class="unnumbered">3 - During the communication with the board</h3>
+<p>After the connection/discovery phase, the following read timeout message can appear after the message <em>Running with inputs=…</em></p>
+<pre class="dosbatch"><code>...
+ON-DEVICE STM32 execution (&quot;network&quot;, auto-detect, 115200)..
+
+&lt;Stm32com id=0x22ba711dd30 - CONNECTED(COM35/115200) devid=0x450/STM32H743/753 and STM32H750 msg=2.1&gt;
+ 0x450/STM32H743/753 and STM32H750 @480MHz/240MHz (FPU is present) lat=4 Core:I$/D$
+ found network(s): [&#39;network&#39;]
+ description    : &#39;network&#39; uint8,(49, 40, 1)-[5]-&gt;uint8,(1, 1, 4) macc=336084 rom=16.30KiB ram=4.25KiB
+ tools versions : rt=(4, 1, 0) tool=(4, 1, 0)/(1, 3, 0) api=(1, 1, 0) &quot;Wed Sep 18 22:28:49 2019&quot;
+
+Running with inputs=(10, 49, 40, 1)..
+.
+LOAD ERROR: STM32 - read timeout 50000ms
+
+or
+
+LOAD ERROR: STM32 - read timeout 10000ms
+</code></pre>
+<p>The reached timeout of <code>10000ms</code>, indicates that the host has not received a ACK message after the transfer of the input buffer. <code>50000ms</code> indicates that the STM32 has not sent a end-of-computation message. Both cases indicate generally a STM32 hard-fault. The more common reason is an issue of the sizing of the stack or/and the heap (see previous <a href="#stack_heap_size_issue"><em>“Incoherent reported STM32 results”</em></a> section).</p>
+</section>
+</section>
+<section id="long-time-process-or-crash-with-a-large-test-data-set" class="level2">
+<h2>Long time process or crash with a large test data set</h2>
+<p>With a large data validation/test set, as the data are completely loaded in memory before its usage, according the desktop memory resources, it is possible that the station hangs or crashes after a non-usual time. To avoid this situation, only a representative and limited part of the validation or test data set should be provided. The whole data set is not requested to evaluate the generated model.</p>
+<p>Example of Python script to create a “small” test data set (based on a Numpy npz file):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> absolute_import, division, print_function, unicode_literals</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the whole data set</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>arrays <span class="op">=</span> np.load(<span class="st">&#39;large_data_set.npz&#39;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the test data set</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>x_test, y_test <span class="op">=</span> arrays[<span class="st">&#39;x_test&#39;</span>], arrays[<span class="st">&#39;y_test&#39;</span>]</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Select randomly 100 samples (fixed seed)</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>msize <span class="op">=</span> <span class="bu">min</span>(<span class="dv">100</span>, <span class="bu">len</span>(x_test))</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>rchoice <span class="op">=</span> np.random.choice(<span class="bu">len</span>(x_test), size<span class="op">=</span>msize, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>x_test, y_test <span class="op">=</span> x_test[rchoice], y_test[rchoice]</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the selected data</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>np.savez(<span class="st">&#39;small_data_set.npz&#39;</span>, x_test<span class="op">=</span>x_test, y_test<span class="op">=</span>y_test)</span></code></pre></div>
+</section>
+</section>
+<section id="quantization-and-post-training-quantization-process" class="level1">
+<h1>Quantization and post-training quantization process</h1>
+<section id="backward-compatibility-with-x-cube-ai-4.0-and-x-cube-ai-4.1" class="level2">
+<h2>Backward compatibility with X-CUBE-AI 4.0 and X-CUBE-AI 4.1</h2>
+<p>X-CUBE-AI 4.0/4.1 reshaped Keras h5 file and associated tensor format configuration file (JSON file) are always supported without adaptation.</p>
+<p>The Keras post-training configuration file and associated Python modules can be always used. <strong>Only</strong> the X-CUBE-AI 4.0 configuration file (JSON file) should be upgraded to add the new mandatory fields: <em>“arithmetic”</em>, <em>“weights_integer_scheme”</em> and <em>“activations_integer_scheme”</em> (refer to <a href="quantization.html#ref_quantize_cmd">[QUANT]</a>, <em>“Quantize command”</em> section).</p>
+<div class="HTips">
+<p><strong>Note</strong> — <strong>Readers</strong> should be aware that the Keras quantization script is fully and only based on the Keras API from the TensorFlow module (version 2.3.1).</p>
+</div>
+</section>
+<section id="is-it-possible-to-use-the-keras-post-training-quantization-process-through-the-ui" class="level2">
+<h2>Is it possible to use the Keras post-training quantization process through the UI?</h2>
+<p><strong>No.</strong> This feature is only available through the CLI.</p>
+</section>
+<section id="is-it-possible-to-use-the-keras-post-training-quantization-process-with-a-non-classifier-model" class="level2">
+<h2>Is it possible to use the Keras post-training quantization process with a non-classifier model?</h2>
+<p><strong>Yes,</strong> classification accuracy or loss metrics are not used for the quantization of the weights and activation tensors.</p>
+</section>
+<section id="is-it-possible-to-use-the-compression-for-a-quantized-model" class="level2">
+<h2>Is it possible to use the compression for a quantized model?</h2>
+<p><strong>No.</strong> The <code>&#39;--compression&#39;</code> option is not supported for the quantized layers. If a compression factor is requested, the following error is generated:</p>
+<pre><code>NOT IMPLEMENTED: Quantizing a compressed tensor is not supported for &lt;name_layer&gt;</code></pre>
+</section>
+<section id="how-to-apply-the-keras-post-training-quantization-process-on-a-non-keras-model" class="level2">
+<h2>How to apply the Keras post-training quantization process on a non-Keras model?</h2>
+<p>This feature is only supported for Keras model (refer to <a href="quantization.html">[QUANT]</a>)</p>
+</section>
+<section id="tensorflow-lite-optimize_for_size-option-support" class="level2">
+<h2>TensorFlow lite, OPTIMIZE_FOR_SIZE option support</h2>
+<p><a href="https://www.tensorflow.org/lite/performance/post_training_quantization">https://www.tensorflow.org/lite/performance/post_training_quantization</a></p>
+<p>Post-quantization TensorFlow lite script (<em>TFLiteConverter</em>, TF 1.15) allows to generate a <strong>weight-only quantized</strong> file (<code>OPTIMIZE_FOR_SIZE</code> option). This simplest scheme (also called “hybrid” quantization) allows to reduce the size of the generated file (~by 4). Only the weights from floating point to 8-bits of precision are quantized. At inference, weights are converted from 8-bits of precision to floating point and computed using floating-point kernels.</p>
+<p>This quantization scheme is not supported by X-CUBE-AI, in particular by the C-inference engine and operator implementations (network runtime library), mainly due to the MCU resource constraints. Additional RAM memory to cache the un-compressed parameters is requested to reduce the latency. If this model is imported, the parameters are converted to floating point before code generation. Only the <strong>full 8b integer quantization of weights and activations</strong> scheme is supported.</p>
+<!-- External ST resources/links -->
+<!-- Internal resources/links -->
+<!-- External resources/links -->
+<!-- Cross references -->
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">ref</th>
+<th style="text-align: left;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">[DS]</td>
+<td style="text-align: left;">X-CUBE-AI - AI expansion pack for STM32CubeMX <a href="https://www.st.com/en/embedded-software/x-cube-ai.html">https://www.st.com/en/embedded-software/x-cube-ai.html</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[UM]</td>
+<td style="text-align: left;">User manual - Getting started with X-CUBE-AI Expansion Package for Artificial Intelligence (AI) <a href="https://www.st.com/resource/en/user_manual/dm00570145.pdf">(pdf)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[CLI]</td>
+<td style="text-align: left;">stm32ai - Command Line Interface <a href="command_line_interface.html">(link)</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[API]</td>
+<td style="text-align: left;">Embedded inference client API <a href="embedded_client_api.html">(link)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[METRIC]</td>
+<td style="text-align: left;">Evaluation report and metrics <a href="evaluation_metrics.html">(link)</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[TFL]</td>
+<td style="text-align: left;">TensorFlow Lite toolbox <a href="supported_ops_tflite.html">(link)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[KERAS]</td>
+<td style="text-align: left;">Keras toolbox <a href="supported_ops_keras.html">(link)</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[ONNX]</td>
+<td style="text-align: left;">ONNX toolbox <a href="supported_ops_onnx.html">(link)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[FAQS]</td>
+<td style="text-align: left;">FAQ <a href="faqs.html">(link)</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[QUANT]</td>
+<td style="text-align: left;">Quantization and quantize command <a href="quantization.html">(link)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[RELOC]</td>
+<td style="text-align: left;">Relocatable binary network support <a href="relocatable.html">(link)</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[CUST]</td>
+<td style="text-align: left;">Support of the Keras Lambda/custom layers <a href="keras_lambda_custom.html">(link)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[TFLM]</td>
+<td style="text-align: left;">TensorFlow Lite for Microcontroller support <a href="tflite_micro_support.html">(link)</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[INST]</td>
+<td style="text-align: left;">Setting the environment <a href="setting_env.html">(link)</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+
+<section class="st_footer">
+
+<h1> <br> </h1>
+
+<p style="font-family:verdana; text-align:left;">
+ Embedded Documentation 
+
+	- <b> FAQs </b>
+			<br> X-CUBE-AI Expansion Package
+	 
+			<br> r3.0
+		 - AI PLATFORM r7.0.0-dev
+			 (Embedded Inference Client API 1.1.0) 
+			 - Command Line Interface r1.5.1 
+		
+	
+</p>
+
+<img src="data:image/png;base64,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" title="ST logo" align="right" height="100" />
+
+<div class="st_notice">
+Information in this document is provided solely in connection with ST products.
+The contents of this document are subject to change without prior notice.
+<br>
+© Copyright STMicroelectronics 2020. All rights reserved. <a href="http://www.st.com">www.st.com</a>
+</div>
+
+<hr size="1" />
+</section>
+
+
+</article>
+</body>
+
+</html>

@@ -14,7 +14,7 @@ def platform_parameters(parser):
     parser.add_argument("--ext_tools", type=str, default="D:/Program Files (x86)/stm32ai-windows-5.2.0/windows", help="Where saved stm32ai.exe")
     parser.add_argument("--cube_ai", type=str, default="./platforms/plugin_stm32/X-CUBE-AI.5.2.0",
                         help="X-CUBE-AI libraries dir")
-    parser.add_argument("--rt_ai_example", type=str, default="./platforms/plugin_stm32/docs",
+    parser.add_argument("--rt_ai_example", type=str, default="./platforms/plugin_stm32/templates",
                         help="Model & platform informations registered to RT-AK Lib, eg:stm32, k210.")
     parser.add_argument("--stm_out", type=str, default="",
                         help="X-CUBE-AI output dir")

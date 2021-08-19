@@ -40,9 +40,9 @@ def load_rt_ai_example(project, rt_ai_example, platform, old_name, new_name):
     rt_ai_example = Path(rt_ai_example)
 
     # model.c
-    file = rt_ai_example / f"{platform}.c"
+    file = rt_ai_example / "rt_ai_template_model.c"
     new_file_name = f"rt_ai_{new_name}_model.c"
-    example_file = Path(project) / 'applications' / new_file_name
+    example_file = Path(project) / "applications" / new_file_name
     if example_file.exists():  example_file.unlink()
 
     update_network_name(file, example_file, old_name, new_name)
