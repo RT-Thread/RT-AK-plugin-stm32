@@ -2,14 +2,16 @@
 
 <center><h1>RT-AK 之 STM32</h1></center>
 
-- [简介](#简介)
-- [目录结构](#目录结构)
-- [命令行参数详细说明](#命令行参数详细说明)
-- [插件安装](#插件安装)
-- [命令行运行 RT-AK](#命令行运行-RT-AK)
-  - [1 基础运行命令](#1-基础运行命令)
-  - [2 指定参数运行](#2-指定参数运行)
-- [插件内部工作流程](#插件内部工作流程)
+[English](./README_en.md) | [中文](./README.md)
+
+- [Intro](#Intro)
+- [Project Tree](#Project Tree)
+- [Command Description](#Command Description)
+- [Install Plug-in](#Install Plug-in)
+- [Run RT-AK Command](#Run RT-AK Command)
+  - [1 Run command](#1 Run command)
+  - [2 Set command parameter](#2 Set command parameter)
+- [Plug-in Workflow](#Plug-in Workflow)
 
 ## Intor
 
@@ -30,7 +32,7 @@
 
 > Date: 2021/06/21
 >
-> Update: 该版本插件尚未支持量化功能，需要量化模型的话请自行研究或者与我们联系，欢迎提 PR，下一个版本将会支持量化功能
+> Update: Current version is not support to Quantitation function
 
 *The project is submodule of `RT-AK` 。It depends on STM32 X-CUBE-AI*
 
@@ -38,7 +40,7 @@
 - Model format：`Keras | TFLite | ONNX`
 - Support op：refor to the  `layer_support.html`  in the folder `docs`  
 
-## Folder Tree
+## Project Tree
 
 ```shell
 % tree -L 2 stm32 
@@ -64,13 +66,13 @@ stm32
 ├── plugin_init.py  # Add environment variable `stm32ai` （`X-CUBE-AI` tool）to system.
 ├── plugin_stm32_parser.py  # `STM32` ai tool parpser
 ├── plugin_stm32.py  # Call STM32 ai tool
-├── prepare_work.py  # 生成两个文件夹，存放 x-cube-ai 静态库和 c-model 文件; 加载对应的 Sconscript
+├── prepare_work.py  # generate two folder，one is for x-cube-ai lib and another for c-model source.
 ├── README.md
-├── run_x_cube_ai.py  # 运行 `stm32ai` 工具，进行模型转换工作
-├── Sconscripts  # 模型转换之后，参与到项目 `scons` 编译的脚本文件
+├── run_x_cube_ai.py  # run `stm32ai` ，
+├── Sconscripts  # `scons` build script
 │   ├── Middlewares
 │   └── X-CUBE-AI
-└── X-CUBE-AI.5.2.0  # `STM32Cube.AI` 所提供的静态库
+└── X-CUBE-AI.5.2.0  # `STM32Cube.AI` lib
     ├── Copyrights.txt
     └── Middlewares
 ```
@@ -81,7 +83,7 @@ $$
 RT-AK\ parameters = （RT-AK\ parameters + STM32\ parameters）
 $$
 
-- RT-AK parameters refer to [链接](https://github.com/RT-Thread/RT-AK/tree/main/RT-AK/rt_ai_tools#0x03-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)
+- RT-AK parameters refer to [link](https://github.com/RT-Thread/RT-AK/tree/main/RT-AK/rt_ai_tools#0x03-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)
 
 - STM32 parameters refer to  `plugin_stm32_parser.py` 
 
@@ -106,127 +108,123 @@ $$
 
 ## Install Plug-in
 
-该插件无需主动安装，
+The Plug-in is auto install. You just clone the Project ：[RT-AK](https://github.com/RT-Thread/RT-AK)
 
-只需要克隆主项目工程：[RT-AK](https://github.com/RT-Thread/RT-AK)
+In the path`RT-AK/rt_ai_tools` ，
 
-进入到 `RT-AK/rt_ai_tools` 路径下，
+run command `python aitools.py --xxx` and set the parameter `platform`  = `stm32` ，then download the plug-in。
 
-**仅需要**在执行 `python aitools.py --xxx` 的同时指定 `platform` 参数为 `stm32` 即可，插件会自动下载。
+## Run RT-AK Command
 
-## 命令行运行 RT-AK
-
-### 1 基础运行命令
+### 1 Run command
 
 请在 `edge-ai/RTAK/tools` 路径下运行该程序。
 
 ![](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210223145923.png)
 
 ```shell
-# 基础运行命令
+# run command template
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --clear
 
-# 示例
+# example
 python aitools.py --project="D:\RT-ThreadStudio\workspace\test" --model="./Models/keras_mnist.h5" --platform=stm32 --ext_tools="D:\Program Files (x86)\stm32ai-windows-5.2.0\windows" --clear
 ```
 
 ![image-20210401181247394](https://gitee.com/lebhoryi/PicGoPictureBed/raw/master/img/20210401181248.png)
 
-### 2 指定参数运行
+### 2 Set command parameter
 
 ```shell
-# 指定转换模型的名称，--model_name 默认为 network
+# set the converted model name，--model_name default network
 python aitools.py --project=<your_project_path> --model=<your_model_path>  --model_name=<model_name>  --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# 保存运行 stm32ai 线程过程中产生的文件，--clear 默认为空
-# 如果存在，则将会删除`stm32ai` 运行时产生的工作文件夹，即`--stm_out`
+# saved stm32ai intermediate file，--clear default None
+# if it already exist，then delete the folder generate by `--stm_out`
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# 指定保存运行日志, --log 默认为空
+# set the log save path, --log default None
 python aitools.py --project=<your_project_path> --model=<your_model_path> --log=./log.log --platform=stm32 --ext_tools=<your_x-cube-ai_path>
 
-# 指定保存的文件夹名称，--stm_out 默认是当天时间，比如 './20210223'
+# set the intermediate file save path，--stm_out default timestamp，like './20210223'
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --stm_out <new_dir>
 
-# 指定生成的 c-model 名，--c_model_name 默认是network
+# set the converted c-model name，--c_model_name default network
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --c_model_name=<new_model_name>
 ```
 
-完整的项目实战例程，请阅读：[RT-AK之STM32快速上手.md](./docs/RT-AK之STM32快速上手.md)
+Complete routines：[RT-AK之STM32快速上手.md](./docs/RT-AK之STM32快速上手.md)
 
-## 插件内部工作流程
+## Plug-in Worflow
 
 - [ ] Quantitation
+- [x] Check whether the model is supported
+- [x] Check whether the `CPU` is supported
+- [x] Set the environment variable `stm32ai` to system，`x-cube-ai`
+- [x] Generate folder for lib and folder for c-model in  `stm_out` 
+- [x] Convert to  `c-model`，and save it to path  `<stm_out>/X-CUBE-AI` 
+- [x] Generate header `rt_ai_<model_name>_model.h` ，and save it to `project/applications` 
+- [x] Generate source `rt_ai_<model_name>_model.c` ，and save it to `project/applications` 
+- [x] Copy  `x-cube-ai` lib  to path  `stm_out` 
+- [x] Copy the files in  `stm_out` to  `project` 
+- [x] Enable  stm32 `HAL_CRC`
+- [x] Delete `stm_out`
 
-- [x] 判断模型是否支持
-- [x] 判断 `CPU` 是否支持
-- [x] 设置 `stm32ai` 系统环境变量，`x-cube-ai`
-- [x] 在 `stm_out` 下生成静态库文件夹和存放 `c-model` 的文件夹
-- [x] 将模型转换成 `c-model`，保存在 `<stm_out>/X-CUBE-AI` 路径下
-- [x] 生成 `rt_ai_<model_name>_model.h` 文件，保存在 `project/applications` 
-- [x] 生成 `rt_ai_<model_name>_model.c` 文件，保存在 `project/applications` 
-- [x] 加载 `x-cube-ai` 的静态库到 `stm_out` 路径下
-- [x] 把 `stm_out` 内的两个关键文件夹加载到 `project` 下
-- [x] 在 `project` 中使能 `HAL_CRC`
-- [x] 判断是否删除 `stm_out`
 
 <details>
-<summary>功能函数</summary> 
-<pre><code>
-1 模型是否支持
-- 函数：`is_valid_model(model, sup_models)`
-- 功能：判断模型是否支持
+<summary>Functions</summary> 
+<pre><code>	
+1 Check whether the model is supported
+
+- @fn：`is_valid_model(model, sup_models)`
+- @brief：Check whether the model is supported
 - input: (model, sup_models_list)
-<br>
-2 cpu是否支持
-- 函数：`is_valid_cpu(project, sup_cpus, cpu="")`
-- 功能：根据 `project/rtconfig.py` 提供的 `CPU` 信息判断是否支持
+
+2 Check whether the CPU is supported
+- @fn：`is_valid_cpu(project, sup_cpus, cpu="")`
+- @brief：Check whether the CPU is supported
 - input: (project, sup_cpus)
 - output: cpu
-<br>
-3 设置环境变量
-- 函数：`set_env(plugin_path)`
-- 功能：设置 `x-cube-ai: stm32.exe` 为系统变量
+
+3 Set the environment variable
+- @fn：`set_env(plugin_path)`
+- @brief：Set the environment variable
 - input: (x-cube-ai_path)
-<br>
-4 生成两个文件夹
-- 函数：`pre_sconscript(aitools_out, stm32_dirs, scons_path="platforms/stm32/Sconscripts")`
-- 功能：
-  1. 生成两个文件夹，分别存放 `x-cube-ai` 静态库和 `c-model` 文件，如果之前存在，先删除原本的文件夹
-  2. 加载对应的 `Sconscript`
+
+4 Generate tow folder
+- @fn：`pre_sconscript(aitools_out, stm32_dirs, scons_path="platforms/stm32/Sconscripts")`
+- @brief：
+  1. Generate folder for lib and folder for c-model
 - input: (stm_out, sconscript_dir, ["Middlewares", "X-CUBE-AI"])
-<br>
-5 模型转换
-- 函数：`stm32ai(model, stm_out, c_model_name, sup_modes, ai_params)`
-- 功能：
-  1. 将模型转换成 `c-model`，支持三种模式：分析、验证、生成（必须有）
-  2. 如果有报错，根据生成的 `report.txt` 文件抛出异常
+
+5 Convert model
+- @fn：`stm32ai(model, stm_out, c_model_name, sup_modes, ai_params)`
+- @brief：Convert model
 - input: (model, stm_out, c_model_name, sup_modes_list, [workspace, compress, batches, mode, val_data])
 - output: flag_list, etc: [False, True, True] 对应 modes=“011” 三种模型执行是否成功
-<br>
-6.1 生成 rt_ai_model.h
-- 函数：`rt_ai_model_gen(stm_out, project, model_name)`
-- 功能：根据生成的 `c-model` 文件生成  `rt_ai_<model_name>_model.h` 文件，保存在 `project/applications` 
+
+6.1 Generate rt_ai_model.h
+- @fn：`rt_ai_model_gen(stm_out, project, model_name)`
+- @brief：generate rt_ai_model.h, and save it to `project/applications` 
 - input: (stm_out, project, c_model_name)
-<br>
-6.2 生成 rt_ai_model.c
-- 函数：`load_rt_ai_example(project, rt_ai_example, platform, old_name, new_name)`
-- 功能：根据提供的模板文件，生成 `rt_ai_<model_name>_model.c` + `rt_ai_template.c/h`文件，保存在 `project/applications` 
+
+6.2 Generate rt_ai_model.c
+- @fn：`load_rt_ai_example(project, rt_ai_example, platform, old_name, new_name)`
+- @brief：generate rt_ai_model.c, and save it to `project/applications` 
 - input: (project, rt_ai_exampl_path, platform, default_model_name, c_model_name)
-<br>
-7 加载 x-cube-ai libs
-- 函数：`load_lib(stm_out, cube_ai_path, cpu, middle=r"Middlewares/ST/AI")`
-- 功能：加载 `x-cube-ai` 静态库到 `stm_out` 中
+
+7 Copy x-cube-ai libs
+- @fn：`load_lib(stm_out, cube_ai_path, cpu, middle=r"Middlewares/ST/AI")`
+- @brief：copy `x-cube-ai` lib to `stm_out` 
 - input: (stm_out, cube_ai_path, cpu, middle=r"Middlewares/ST/AI")
-<br>
-8 加载到 project
-- 函数：`load_to_project(stm_out, project, stm32_dirs)`
-- 功能：加载 `stm_out` 两个文件夹到 `project` 中。如果之前有存在，则先删除
+
+8 Copy to project
+- @fn：`load_to_project(stm_out, project, stm32_dirs)`
+- @brief：copy some files in `stm_out` to `project`, it will delete already exist files
 - input: (stm_out, project, ["Middlewares", "X-CUBE-AI"])
-<br>
-9 使能 HAL-CRC
-- 函数：`enable_hal_crc(project)`
-- 功能：在 `project/board/...` 文件中使能 `HAL_CRC_MODULE_ENABLED`
+
+9 Enable HAL-CRC
+- @fn：`enable_hal_crc(project)`
+- @brief：Enable `HAL_CRC_MODULE_ENABLED`
 - input: (project)
 </code></pre>
 </details>
