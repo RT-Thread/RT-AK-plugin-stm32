@@ -2,6 +2,8 @@
 
 <center><h1>RT-AK 之 STM32</h1></center>
 
+[English](./README_en.md) | [中文](./README.md)
+
 - [简介](#简介)
 - [目录结构](#目录结构)
 - [命令行参数详细说明](#命令行参数详细说明)
