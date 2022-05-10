@@ -234,7 +234,7 @@ class Plugin(object):
             # hal_crc index
             index = [i for i in range(len(lines))
                      if "HAL_CRC_MODULE_ENABLED" in lines[i]][0]
-            new_line = " ".join(lines[index].split()[1:-1])
+            new_line = " ".join(lines[index].split('*')[1:-1])
             new_line += "\n"
 
             if "*" in lines[index]:
