@@ -150,6 +150,8 @@ python aitools.py --project=<your_project_path> --model=<your_model_path> --plat
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --c_model_name=<new_model_name>
 ```
 
+**Note: 'ai_tools.py' will add '#define RT_AI_USE_CUBE' to 'rtconfig.h'. If the project is configured after the model is injected into the project using the tool, this macro will be refreshed, resulting in compilation errors.  Therefore, it is necessary to complete the project configuration before using the tool for model injection**
+ 
 Complete routines：[RT-AK_on_STM32_quickly_start.md](./docs/RT-AK之STM32快速上手.md) *(Chinese only yet)*
 
 ## Plug-in Workflow
