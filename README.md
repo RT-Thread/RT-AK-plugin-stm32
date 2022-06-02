@@ -159,7 +159,9 @@ python aitools.py --project=<your_project_path> --model=<your_model_path> --plat
 # 指定生成的 c-model 名，--c_model_name 默认是network
 python aitools.py --project=<your_project_path> --model=<your_model_path> --platform=stm32 --ext_tools=<your_x-cube-ai_path> --c_model_name=<new_model_name>
 ```
-
+ 
+**注意：`ai_tools.py`会在`rtconfig.h`中添加`#define RT_AI_USE_CUBE`，如果在使用工具注入模型到工程后，又对工程进行了配置则会导致这个宏刷新掉，从而导致编译报错。因此需要先将工程配置完成后再使用工具进行模型注入**
+ 
 完整的项目实战例程，请阅读：[RT-AK之STM32快速上手.md](./docs/RT-AK之STM32快速上手.md)
 
 ## 插件内部工作流程
