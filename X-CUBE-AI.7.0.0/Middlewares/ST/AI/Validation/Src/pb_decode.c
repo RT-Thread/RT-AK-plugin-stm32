@@ -659,14 +659,15 @@ static bool checkreturn decode_callback_field(pb_istream_t *stream, pb_wire_type
 {
     pb_callback_t *pCallback = (pb_callback_t*)iter->pData;
     
+    if (pCallback == NULL || pCallback->funcs.decode == NULL)
+        return pb_skip_field(stream, wire_type);
+        
 #ifdef PB_OLD_CALLBACK_STYLE
     void *arg = pCallback->arg;
 #else
     void **arg = &(pCallback->arg);
 #endif
     
-    if (pCallback == NULL || pCallback->funcs.decode == NULL)
-        return pb_skip_field(stream, wire_type);
     
     if (wire_type == PB_WT_STRING)
     {

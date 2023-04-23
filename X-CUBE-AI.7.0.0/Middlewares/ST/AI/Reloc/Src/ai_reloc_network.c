@@ -297,8 +297,6 @@ AI_DECLARE_STATIC
 int ai_reloc_rt_mcu_checking(const struct ai_reloc_bin_hdr *bin)
 {
 #if defined(AI_RELOC_RT_MCU_CHECKING) && AI_RELOC_RT_MCU_CHECKING == 1
-  const uint32_t flags = bin->hdr.flags;
-  const uint32_t cpuid = _GET_PART_NUMBER();
 
   if (!bin || (bin->hdr.magic != AI_RELOC_MAGIC) || (((uintptr_t)bin & 0x3) != 0)) {
 #if defined(APP_DEBUG) && APP_DEBUG == 1
@@ -306,6 +304,10 @@ int ai_reloc_rt_mcu_checking(const struct ai_reloc_bin_hdr *bin)
 #endif
       return -1;
   }
+
+  const uint32_t flags = bin->hdr.flags;
+  const uint32_t cpuid = _GET_PART_NUMBER();
+
 
   if (cpuid != AI_RELOC_RT_GET_CPUID(flags)) {
 #if defined(APP_DEBUG) && APP_DEBUG == 1
